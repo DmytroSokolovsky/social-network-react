@@ -1,0 +1,25 @@
+.sidebar {
+  background-color: #23272f;
+  // .sidebar__body
+  &__body {
+  }
+  // .sidebar__list
+  &__list {
+    li {
+      padding: 10px 15px;
+      border-bottom: 2px solid #333a45;
+    }
+  }
+  // .sidebar__link
+  &__link {
+    color: #fff;
+    font-size: 18px;
+    font-family: "PT-Sans-regular-bold", serif;
+    &:hover {
+      color: #00d8ff;
+    }
+    &_active {
+      color: #00d8ff;
+    }
+  }
+}

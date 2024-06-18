@@ -1,0 +1,100 @@
+$mwContainer: 1400px;
+$md1: $mwContainer + 12px;
+$md2: 992.98px;
+$md3: 767.98px;
+$md4: 479.98px;
+
+.profile {
+  padding: 15px 20px;
+  background-color: #23272f;
+  width: 100%;
+  // .profile__header
+  &__header {
+    margin: 0px 0px 20px 0px;
+  }
+  // .profile__posts
+  &__posts {
+  }
+}
+.header-profile {
+  display: flex;
+  // .header-profile__column
+  &__column {
+    &:first-child {
+      margin: 0px 20px 0px 0px;
+    }
+  }
+  // .header-profile__avatar
+  &__avatar {
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  // .header-profile__status
+  &__status {
+    font-size: 18px;
+    font-family: "PT-Sans-regular", serif;
+  }
+  // .header-profile__info
+  &__info {
+    font-size: 18px;
+    font-family: "PT-Sans-regular", serif;
+  }
+}
+.posts-profile {
+  // .posts-profile__top
+  &__top {
+    margin: 0px 0px 20px 0px;
+  }
+  // .posts-profile__textarea
+  &__textarea {
+    margin: 0px 0px 5px 0px;
+    textarea {
+      resize: vertical;
+      width: 50%;
+      background-color: #333a45;
+      padding: 5px 10px;
+      font-size: 18px;
+      color: #fff;
+      &::placeholder {
+        font-size: 18px;
+        font-family: "PT-Sans-italic", serif;
+      }
+      @media (max-width: $md3) {
+        width: 100%;
+      }
+    }
+  }
+  // .posts-profile__send
+  &__send {
+    button {
+      background-color: #fff;
+      color: #23272f;
+      font-size: 18px;
+      font-family: "PT-Sans-regular-bold", serif;
+      padding: 5px 10px;
+    }
+  }
+  // .posts-profile__bottom
+  &__bottom {
+    margin: 0px 0px 10px 0px;
+  }
+}
+.posts-profile-bottom {
+  display: flex;
+  align-items: flex-start;
+  // .posts-profile-bottom__avatar
+  &__avatar {
+    margin: 0px 10px 0px 0px;
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  // .posts-profile-bottom__text
+  &__text {
+    font-size: 18px;
+    font-family: "PT-Sans-regular", serif;
+  }
+}
