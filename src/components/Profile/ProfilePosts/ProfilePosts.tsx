@@ -3,32 +3,26 @@ import cn from 'classnames';
 import { useState } from 'react';
 import { AddPost } from './AddPost/AddPost';
 import { Posts } from './Posts/Posts';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPosts } from '../../../redux/selectors/profile-selector';
+import { addPost } from '../../../redux/profile-reducer';
 
 export const ProfilePosts = () => {
-  const [posts, setPosts] = useState<Array<{ id: number; text: string }>>([]);
+  const posts = useSelector(getPosts);
+  const dispatch = useDispatch();
+
   const [text, setText] = useState('');
-  const [id, setId] = useState(1);
+
+  let profilePosts = cn(s.profile__posts, s['posts-profile']);
 
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
 
   const handleSend = () => {
-    setPosts(prevPosts => [
-      ...prevPosts,
-      {
-        id: id,
-        text: text,
-      },
-    ]);
-
-    setId(prevId => prevId + 1);
+    dispatch(addPost(text));
     setText('');
-
-    console.log(posts);
   };
-
-  let profilePosts = cn(s.profile__posts, s['posts-profile']);
 
   return (
     <div className={profilePosts}>
