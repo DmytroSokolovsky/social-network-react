@@ -1,0 +1,16 @@
+.toast {
+  background-color: #00d8ff;
+  font-size: 18px;
+  color: #fff;
+  padding: 10px 20px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transition: all 0.3s ease 0s;
+  transform: translate(-50%, -100px);
+  &.open {
+    transform: translate(-50%, 0px);
+  }
+  span {
+  }
+}

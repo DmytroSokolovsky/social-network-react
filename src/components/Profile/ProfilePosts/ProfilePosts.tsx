@@ -3,13 +3,13 @@ import cn from 'classnames';
 import { useState } from 'react';
 import { AddPost } from './AddPost/AddPost';
 import { Posts } from './Posts/Posts';
-import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../../redux/selectors/profile-selector';
 import { addPost } from '../../../redux/profile-reducer';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 
 export const ProfilePosts = () => {
-  const posts = useSelector(getPosts);
-  const dispatch = useDispatch();
+  const posts = useAppSelector(getPosts);
+  const dispatch = useAppDispatch();
 
   const [text, setText] = useState('');
 
@@ -20,8 +20,10 @@ export const ProfilePosts = () => {
   };
 
   const handleSend = () => {
-    dispatch(addPost(text));
-    setText('');
+    if (text.trim().length > 0) {
+      dispatch(addPost(text));
+      setText('');
+    }
   };
 
   return (
