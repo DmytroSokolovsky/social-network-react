@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { instance } from './api';
 
 interface MeType {
   id: number;
@@ -16,14 +16,6 @@ interface APIResponseType {
   resultCode: ResultCodesEnum;
   messages: Array<string>;
 }
-
-const instance = axios.create({
-  baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-  withCredentials: true,
-  headers: {
-    'API-KEY': '42a9bba6-f409-4ac7-8ae5-0a7a3c454b3e',
-  },
-});
 
 export const authAPI = {
   me() {
