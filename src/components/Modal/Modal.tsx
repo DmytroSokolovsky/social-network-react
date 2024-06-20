@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import cn from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { login } from '../../redux/auth-reducer';
+import { getLoginStatus } from '../../redux/selectors/auth-selector';
 
 interface ModalPropsType {
   setModalOpen: (boolean: boolean) => void;
@@ -18,11 +21,13 @@ interface FormData {
 
 export const Modal = ({ setModalOpen }: ModalPropsType) => {
   const [passwordOpen, setPasswordOpen] = useState<boolean>(false);
+  const loginStatus = useAppSelector(getLoginStatus);
+
+  const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors, isValid },
   } = useForm<FormData>({
@@ -39,7 +44,9 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
 
   const onSubmit = handleSubmit(data => {
     JSON.stringify(data);
-    console.log(data);
+    dispatch(login(data));
+
+    setModalOpen(false);
     reset();
   });
 

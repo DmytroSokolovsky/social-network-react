@@ -1,4 +1,4 @@
-import { instance } from './api';
+import { APIResponseType, instance } from './api';
 
 interface MeType {
   id: number;
@@ -6,25 +6,7 @@ interface MeType {
   login: string;
 }
 
-export enum ResultCodesEnum {
-  Success = 0,
-  Error = 1,
-}
-
-export enum ResultCodesEnumForCaptcha {
-  Captcha = 10,
-}
-
-interface APIResponseType<
-  D = {},
-  RC = ResultCodesEnum | ResultCodesEnumForCaptcha,
-> {
-  data: D;
-  resultCode: RC;
-  messages: Array<string>;
-}
-
-interface LoginResponseType {
+export interface LoginResponseType {
   userId: number;
 }
 
@@ -35,18 +17,12 @@ export const authAPI = {
       .then(response => response.data);
   },
 
-  login(
-    email: string,
-    password: string,
-    rememberMe: boolean,
-    captcha: boolean,
-  ) {
+  login(email: string, password: string, rememberMe: boolean) {
     return instance
       .post<APIResponseType<LoginResponseType>>('auth/login', {
         email,
         password,
         rememberMe,
-        captcha,
       })
       .then(response => response.data);
   },

@@ -1,5 +1,32 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ResultCodesEnum, authAPI } from '../api/auth-api';
+import { LoginResponseType, authAPI } from '../api/auth-api';
+import {
+  APIResponseType,
+  ResultCodesEnum,
+  ResultCodesEnumForCaptcha,
+} from '../api/api';
+
+interface LoginParametrsType {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export const login = createAsyncThunk<
+  APIResponseType<LoginResponseType>,
+  LoginParametrsType
+>(
+  'auth/login',
+
+  async (loginData, { dispatch }) => {
+    const { email, password, rememberMe } = loginData;
+    const data = await authAPI.login(email, password, rememberMe);
+    if (data.resultCode === ResultCodesEnum.Success) {
+      dispatch(setAuthUserData());
+    }
+    return data;
+  },
+);
 
 export const logout = createAsyncThunk(
   'auth/logout',
@@ -38,6 +65,7 @@ interface AuthState {
   id: number | null;
   email: string | null;
   login: string | null;
+  isAuth: boolean;
   loginStatus: loginStatusType | null;
   loginErrorMessage: string | null;
 }
@@ -46,6 +74,7 @@ const initialState: AuthState = {
   id: null,
   email: null,
   login: null,
+  isAuth: false,
   loginStatus: null,
   loginErrorMessage: null,
 };
@@ -64,6 +93,7 @@ const authSlice = createSlice({
       state.id = action.payload.data.id;
       state.email = action.payload.data.email;
       state.login = action.payload.data.login;
+      state.isAuth = true;
     });
     builder.addCase(setAuthUserData.rejected, (state, action) => {
       state.loginStatus = 'rejected';
@@ -75,6 +105,7 @@ const authSlice = createSlice({
       state.id = null;
       state.email = null;
       state.login = null;
+      state.isAuth = false;
     });
     builder.addCase(logout.rejected, (state, action) => {});
   },

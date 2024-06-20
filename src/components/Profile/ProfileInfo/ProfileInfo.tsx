@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { useEffect } from 'react';
 import { getProfileUserData } from '../../../redux/profile-reducer';
 import { useParams } from 'react-router-dom';
-import { getId } from '../../../redux/selectors/auth-selector';
+import { getId, getIsAuth } from '../../../redux/selectors/auth-selector';
 import {
   getDescription,
   getProfileErrorMessage,
@@ -22,6 +22,7 @@ export const ProfileInfo = () => {
   const profileDescription = useAppSelector(getDescription);
   const profileStatus = useAppSelector(getProfileStatus);
   const profileErrorMessage = useAppSelector(getProfileErrorMessage);
+  const isAuth = useAppSelector(getIsAuth);
 
   let { userId } = useParams<{ userId?: any }>();
 
@@ -33,42 +34,44 @@ export const ProfileInfo = () => {
     if (userId !== null) {
       dispatch(getProfileUserData(userId));
     }
-  });
+  }, [userId, dispatch]);
 
   return (
     <>
       <div className={profileHeader}>
         <div className={s['header-profile__column']}>
           <div className={s['header-profile__avatar']}>
-            {profileDescription?.photos?.large ? (
+            {profileDescription?.photos?.large && isAuth ? (
               <img src={profileDescription?.photos?.large} alt="" />
             ) : (
               <img src={profileAvatar} alt="" />
             )}
           </div>
         </div>
-        <div className={s['header-profile__column']}>
-          <div className={s['header-profile__status']}>Status</div>
-          <div className={s['header-profile__info']}>Info</div>
-          <div>About me: {profileDescription?.aboutMe}</div>
-          <br />
-          <div>Contacts</div>
-          <div>facebook: {profileDescription?.contacts.facebook}</div>
-          <div>github: {profileDescription?.contacts.github}</div>
-          <div>instagram: {profileDescription?.contacts.instagram}</div>
-          <div>mainLink: {profileDescription?.contacts.mainLink}</div>
-          <div>twitter: {profileDescription?.contacts.twitter}</div>
-          <div>vk: {profileDescription?.contacts.vk}</div>
-          <div>website: {profileDescription?.contacts.website}</div>
-          <div>youtube: {profileDescription?.contacts.youtube}</div>
-          <br />
-          <div>fullName: {profileDescription?.fullName}</div>
-          <div>lookingForAJob: {profileDescription?.lookingForAJob}</div>
-          <div>
-            lookingForAJobDescription:{' '}
-            {profileDescription?.lookingForAJobDescription}
+        {profileStatus === 'resolved' && isAuth && (
+          <div className={s['header-profile__column']}>
+            <div className={s['header-profile__status']}>Status</div>
+            <div className={s['header-profile__info']}>Info</div>
+            <div>About me: {profileDescription?.aboutMe}</div>
+            <br />
+            <div>Contacts</div>
+            <div>facebook: {profileDescription?.contacts.facebook}</div>
+            <div>github: {profileDescription?.contacts.github}</div>
+            <div>instagram: {profileDescription?.contacts.instagram}</div>
+            <div>mainLink: {profileDescription?.contacts.mainLink}</div>
+            <div>twitter: {profileDescription?.contacts.twitter}</div>
+            <div>vk: {profileDescription?.contacts.vk}</div>
+            <div>website: {profileDescription?.contacts.website}</div>
+            <div>youtube: {profileDescription?.contacts.youtube}</div>
+            <br />
+            <div>fullName: {profileDescription?.fullName}</div>
+            <div>lookingForAJob: {profileDescription?.lookingForAJob}</div>
+            <div>
+              lookingForAJobDescription:{' '}
+              {profileDescription?.lookingForAJobDescription}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {profileStatus === 'loading' && <Preloader />}
       {profileStatus === 'rejected' && (

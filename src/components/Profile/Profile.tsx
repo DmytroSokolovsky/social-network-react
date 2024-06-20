@@ -4,10 +4,12 @@ import { ProfilePosts } from './ProfilePosts/ProfilePosts';
 
 const Profile = () => {
   return (
-    <div className={s.profile}>
-      <ProfileInfo />
-      <ProfilePosts />
-    </div>
+    <>
+      <div className={s.profile}>
+        <ProfileInfo />
+        <ProfilePosts />
+      </div>
+    </>
   );
 };
 

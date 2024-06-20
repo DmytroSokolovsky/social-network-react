@@ -7,3 +7,6 @@ export const getLoginStatus = (state: RootState) => state.auth.loginStatus;
 export const getloginErrorMessage = (state: RootState) => {
   return state.auth.loginErrorMessage;
 };
+export const getIsAuth = (state: RootState) => {
+  return state.auth.isAuth;
+};

@@ -6,6 +6,7 @@ import s from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logout, setAuthUserData } from '../../redux/auth-reducer';
 import {
+  getIsAuth,
   getLogin,
   getLoginStatus,
   getloginErrorMessage,
@@ -22,9 +23,10 @@ const Header = () => {
   const login = useAppSelector(getLogin);
   const loginStatus = useAppSelector(getLoginStatus);
   const loginErrorMessage = useAppSelector(getloginErrorMessage);
+  const isAuth = useAppSelector(getIsAuth);
 
   useEffect(() => {
-    // dispatch(setAuthUserData());
+    dispatch(setAuthUserData());
   }, [dispatch]);
 
   const handleOpen = () => {
@@ -33,6 +35,7 @@ const Header = () => {
 
   const handleExit = () => {
     dispatch(logout());
+    setOpen(prevOpen => !prevOpen);
   };
 
   const handleSingIn = () => {
@@ -53,7 +56,7 @@ const Header = () => {
             </Link>
           </div>
           <div className={s.header__column}>
-            {loginStatus === 'resolved' ? (
+            {loginStatus === 'resolved' && isAuth ? (
               <>
                 <div className={s.header__human}>
                   <img src={headerHuman} alt="" onClick={handleOpen} />

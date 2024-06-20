@@ -1,5 +1,23 @@
 import axios from 'axios';
 
+export enum ResultCodesEnum {
+  Success = 0,
+  Error = 1,
+}
+
+export enum ResultCodesEnumForCaptcha {
+  Captcha = 10,
+}
+
+export interface APIResponseType<
+  D = {},
+  RC = ResultCodesEnum | ResultCodesEnumForCaptcha,
+> {
+  data: D;
+  resultCode: RC;
+  messages: Array<string>;
+}
+
 export const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   withCredentials: true,
