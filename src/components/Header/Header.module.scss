@@ -38,14 +38,16 @@
   // .header__actions
   &__actions {
   }
-  &__singIn {
+  &__signIn {
     position: relative;
     cursor: pointer;
-    padding: 5px 10px;
     background-color: #fff;
     font-family: "PT-Sans-regular-bold", serif;
     font-size: 18px;
+    border: 2px solid #fff;
     span {
+      display: block;
+      padding: 5px 10px;
       color: #23272f;
       transition: all 0.3s ease 0s;
     }

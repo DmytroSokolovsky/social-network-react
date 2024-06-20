@@ -10,9 +10,13 @@ interface PostsType {
   text: string;
 }
 
+type profileStatusType = 'loading' | 'resolved' | 'rejected';
+
 interface ProfileState {
   posts: PostsType[];
   profile: ProfileType | null;
+  profileErrorMessage: string | null;
+  profileStatus: profileStatusType | null;
 }
 
 export const getProfileUserData = createAsyncThunk(
@@ -37,6 +41,8 @@ export const getProfileUserData = createAsyncThunk(
 const initialState: ProfileState = {
   posts: [],
   profile: null,
+  profileErrorMessage: null,
+  profileStatus: null,
 };
 
 const profileSlice = createSlice({
@@ -51,11 +57,18 @@ const profileSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(getProfileUserData.pending, (state, action) => {});
+    builder.addCase(getProfileUserData.pending, (state, action) => {
+      state.profileStatus = 'loading';
+      state.profileErrorMessage = null;
+    });
     builder.addCase(getProfileUserData.fulfilled, (state, action) => {
+      state.profileStatus = 'resolved';
       state.profile = action.payload;
     });
-    builder.addCase(getProfileUserData.rejected, (state, action) => {});
+    builder.addCase(getProfileUserData.rejected, (state, action) => {
+      state.profileStatus = 'rejected';
+      state.profileErrorMessage = action.payload as string;
+    });
   },
 });
 

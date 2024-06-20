@@ -5,19 +5,26 @@ import { useEffect, useState } from 'react';
 import s from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logout, setAuthUserData } from '../../redux/auth-reducer';
-import { getLogin, getLoginStatus } from '../../redux/selectors/auth-selector';
+import {
+  getLogin,
+  getLoginStatus,
+  getloginErrorMessage,
+} from '../../redux/selectors/auth-selector';
 import { Preloader } from '../Preloader/Preloader';
 import { Toast } from '../Toast/Toast';
 import cn from 'classnames';
+import { Modal } from '../Modal/Modal';
 
 const Header = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const login = useAppSelector(getLogin);
   const loginStatus = useAppSelector(getLoginStatus);
+  const loginErrorMessage = useAppSelector(getloginErrorMessage);
 
   useEffect(() => {
-    dispatch(setAuthUserData());
+    // dispatch(setAuthUserData());
   }, [dispatch]);
 
   const handleOpen = () => {
@@ -26,6 +33,10 @@ const Header = () => {
 
   const handleExit = () => {
     dispatch(logout());
+  };
+
+  const handleSingIn = () => {
+    setModalOpen(true);
   };
 
   let actionsClass = cn(s.header__actions, s['actions-header'], {
@@ -68,15 +79,16 @@ const Header = () => {
                 </div>
               </>
             ) : (
-              <div className={s.header__singIn}>
-                <span>Sing In</span>
+              <div className={s.header__signIn} onClick={handleSingIn}>
+                <span>Sign In</span>
               </div>
             )}
           </div>
         </div>
       </div>
       {loginStatus === 'loading' && <Preloader />}
-      {loginStatus === 'rejected' && <Toast />}
+      {loginStatus === 'rejected' && <Toast errorMessage={loginErrorMessage} />}
+      {modalOpen && <Modal setModalOpen={setModalOpen} />}
     </>
   );
 };

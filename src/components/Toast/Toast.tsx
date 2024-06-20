@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useAppSelector } from '../../hooks/hooks';
-import { getloginErrorMessage } from '../../redux/selectors/auth-selector';
 import cn from 'classnames';
 import s from './Toast.module.scss';
 
-export const Toast = () => {
+interface ToastPropsType {
+  errorMessage: string | null;
+}
+
+export const Toast = ({ errorMessage }: ToastPropsType) => {
   const [seconds, setSeconds] = useState<number>(0);
-  const loginErrorMessage = useAppSelector(getloginErrorMessage);
 
   let toastClass = cn(s.toast);
 
@@ -37,7 +38,7 @@ export const Toast = () => {
 
   return createPortal(
     <div className={toastClass}>
-      <span>{loginErrorMessage}</span>
+      <span>{errorMessage}</span>
     </div>,
     document.body,
   );

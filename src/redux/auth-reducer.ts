@@ -32,11 +32,13 @@ export const setAuthUserData = createAsyncThunk(
   },
 );
 
+type loginStatusType = 'loading' | 'resolved' | 'rejected';
+
 interface AuthState {
   id: number | null;
   email: string | null;
   login: string | null;
-  loginStatus: string | null;
+  loginStatus: loginStatusType | null;
   loginErrorMessage: string | null;
 }
 
