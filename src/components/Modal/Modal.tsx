@@ -7,7 +7,10 @@ import { useState } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { login } from '../../redux/auth-reducer';
-import { getLoginStatus } from '../../redux/selectors/auth-selector';
+import {
+  getLoginMessage,
+  getLoginStatus,
+} from '../../redux/selectors/auth-selector';
 
 interface ModalPropsType {
   setModalOpen: (boolean: boolean) => void;
@@ -22,6 +25,7 @@ interface FormData {
 export const Modal = ({ setModalOpen }: ModalPropsType) => {
   const [passwordOpen, setPasswordOpen] = useState<boolean>(false);
   const loginStatus = useAppSelector(getLoginStatus);
+  const loginMessage = useAppSelector(getLoginMessage);
 
   const dispatch = useAppDispatch();
 
@@ -46,8 +50,10 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
     JSON.stringify(data);
     dispatch(login(data));
 
-    setModalOpen(false);
-    reset();
+    if (loginStatus === 'resolved') {
+      setModalOpen(false);
+      reset();
+    }
   });
 
   let signInClass = cn(s.modal__signIn, {
@@ -130,6 +136,9 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
             <button type="submit" className={signInClass}>
               <span>Sign In</span>
             </button>
+            {loginMessage && (
+              <div className={s.login__error}>{loginMessage}</div>
+            )}
           </form>
         </div>
       </div>

@@ -4,12 +4,14 @@ import headerHuman from '../../images/header_actions.png';
 import { useEffect, useState } from 'react';
 import s from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logout, setAuthUserData } from '../../redux/auth-reducer';
+import { logout, getAuthUserData } from '../../redux/auth-reducer';
 import {
   getIsAuth,
   getLogin,
-  getLoginStatus,
-  getloginErrorMessage,
+  getAuthMeStatus,
+  getAuthMeErrorMessage,
+  getLogoutStatus,
+  getLogoutMessage,
 } from '../../redux/selectors/auth-selector';
 import { Preloader } from '../Preloader/Preloader';
 import { Toast } from '../Toast/Toast';
@@ -21,12 +23,15 @@ const Header = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const login = useAppSelector(getLogin);
-  const loginStatus = useAppSelector(getLoginStatus);
-  const loginErrorMessage = useAppSelector(getloginErrorMessage);
+  const authMeStatus = useAppSelector(getAuthMeStatus);
+  const authMeErrorMessage = useAppSelector(getAuthMeErrorMessage);
   const isAuth = useAppSelector(getIsAuth);
 
+  const logoutStatus = useAppSelector(getLogoutStatus);
+  const logoutMessage = useAppSelector(getLogoutMessage);
+
   useEffect(() => {
-    dispatch(setAuthUserData());
+    dispatch(getAuthUserData());
   }, [dispatch]);
 
   const handleOpen = () => {
@@ -56,7 +61,7 @@ const Header = () => {
             </Link>
           </div>
           <div className={s.header__column}>
-            {loginStatus === 'resolved' && isAuth ? (
+            {authMeStatus === 'resolved' && isAuth ? (
               <>
                 <div className={s.header__human}>
                   <img src={headerHuman} alt="" onClick={handleOpen} />
@@ -89,9 +94,12 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {loginStatus === 'loading' && <Preloader />}
-      {loginStatus === 'rejected' && <Toast errorMessage={loginErrorMessage} />}
+      {authMeStatus === 'loading' && <Preloader />}
+      {authMeStatus === 'rejected' && (
+        <Toast errorMessage={authMeErrorMessage} />
+      )}
       {modalOpen && <Modal setModalOpen={setModalOpen} />}
+      {logoutStatus === 'rejected' && <Toast errorMessage={logoutMessage} />}
     </>
   );
 };

@@ -3,10 +3,26 @@ import { RootState } from '../store';
 export const getLogin = (state: RootState) => state.auth.login;
 export const getEmail = (state: RootState) => state.auth.email;
 export const getId = (state: RootState) => state.auth.id;
-export const getLoginStatus = (state: RootState) => state.auth.loginStatus;
-export const getloginErrorMessage = (state: RootState) => {
-  return state.auth.loginErrorMessage;
-};
+
 export const getIsAuth = (state: RootState) => {
   return state.auth.isAuth;
+};
+
+export const getAuthMeStatus = (state: RootState) => state.auth.authMeStatus;
+export const getAuthMeErrorMessage = (state: RootState) => {
+  return state.auth.authMeErrorMessage;
+};
+
+export const getLoginStatus = (state: RootState) => {
+  return state.auth.loginStatus;
+};
+export const getLoginMessage = (state: RootState) => {
+  return state.auth.loginMessage;
+};
+
+export const getLogoutStatus = (state: RootState) => {
+  return state.auth.logoutStatus;
+};
+export const getLogoutMessage = (state: RootState) => {
+  return state.auth.logoutMessage;
 };
