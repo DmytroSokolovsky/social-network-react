@@ -75,11 +75,8 @@ const Header = () => {
                         </div>
                       </li>
                       <li>
-                        <div
-                          className={s['actions-header__exit']}
-                          onClick={handleExit}
-                        >
-                          Exit
+                        <div className={s['actions-header__exit']}>
+                          <span onClick={handleExit}>Exit</span>
                         </div>
                       </li>
                     </ul>

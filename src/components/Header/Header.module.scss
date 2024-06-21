@@ -94,7 +94,11 @@
   }
   &__list {
     li {
-      margin: 0px 0px 5px 0px;
+      padding: 5px 0;
+      border-bottom: 1px solid #23272f;
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
   &__login {
@@ -103,7 +107,11 @@
   }
   &__exit {
     display: inline-block;
-    cursor: pointer;
     font-family: "PT-Sans-regular-bold", serif;
+    display: flex;
+    justify-content: flex-end;
+    span {
+      cursor: pointer;
+    }
   }
 }
