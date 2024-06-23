@@ -11,6 +11,13 @@ export const Posts = ({ posts }: PostsPropsType) => {
         return <Post key={post.id} text={post.text} />;
       })}
       <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
+      <Post text={'Перший пост!'} />
     </>
   );
 };

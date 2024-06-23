@@ -26,3 +26,14 @@ export const getLogoutStatus = (state: RootState) => {
 export const getLogoutMessage = (state: RootState) => {
   return state.auth.logoutMessage;
 };
+
+export const getCaptchaUrl = (state: RootState) => {
+  return state.auth.captchaUrl;
+};
+
+export const getCaptchaStatus = (state: RootState) => {
+  return state.auth.captchaStatus;
+};
+export const getCaptchaErrorMessage = (state: RootState) => {
+  return state.auth.captchaErrorMessage;
+};

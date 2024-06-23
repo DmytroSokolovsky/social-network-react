@@ -10,6 +10,9 @@ import { login } from '../../redux/auth-reducer';
 import {
   getLoginMessage,
   getLoginStatus,
+  getCaptchaUrl,
+  getCaptchaStatus,
+  getCaptchaErrorMessage,
 } from '../../redux/selectors/auth-selector';
 
 interface ModalPropsType {
@@ -20,12 +23,16 @@ interface FormData {
   email: string;
   password: string;
   rememberMe: boolean;
+  captcha: string;
 }
 
 export const Modal = ({ setModalOpen }: ModalPropsType) => {
   const [passwordOpen, setPasswordOpen] = useState<boolean>(false);
   const loginStatus = useAppSelector(getLoginStatus);
   const loginMessage = useAppSelector(getLoginMessage);
+  const captchaUrl = useAppSelector(getCaptchaUrl);
+  const captchaStatus = useAppSelector(getCaptchaStatus);
+  const captchaErrorMessage = useAppSelector(getCaptchaErrorMessage);
 
   const dispatch = useAppDispatch();
 
@@ -84,7 +91,7 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
                 placeholder="Enter email..."
               />
               {errors?.email && (
-                <div className={s.email__error}>
+                <div className={s.error}>
                   {errors?.email?.message || 'Error'}
                 </div>
               )}
@@ -120,7 +127,7 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
                 )}
               </div>
               {errors?.password && (
-                <div className={s.password__error}>
+                <div className={s.error}>
                   {errors?.password?.message || 'Error'}
                 </div>
               )}
@@ -133,11 +140,32 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
               />
               <span>Remember me</span>
             </label>
+            {captchaUrl && (
+              <label htmlFor="captcha" className={s.modal__captcha}>
+                <img src={captchaUrl} alt="Captcha" />
+                <input
+                  {...register('captcha', {
+                    required: 'Field is required!',
+                  })}
+                  type="input"
+                  name="captcha"
+                  placeholder="Enter numbers from the image..."
+                />
+                {errors?.captcha && (
+                  <div className={s.error}>
+                    {errors?.captcha?.message || 'Error'}
+                  </div>
+                )}
+              </label>
+            )}
             <button type="submit" className={signInClass}>
               <span>Sign In</span>
             </button>
-            {loginMessage && (
-              <div className={s.login__error}>{loginMessage}</div>
+            {loginStatus === 'rejected' && (
+              <div className={s.error}>{loginMessage}</div>
+            )}
+            {captchaStatus === 'rejected' && (
+              <div className={s.error}>{captchaErrorMessage}</div>
             )}
           </form>
         </div>

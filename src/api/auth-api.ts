@@ -17,12 +17,18 @@ export const authAPI = {
       .then(response => response.data);
   },
 
-  login(email: string, password: string, rememberMe: boolean) {
+  login(
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: string | null = null,
+  ) {
     return instance
       .post<APIResponseType<LoginResponseType>>('auth/login', {
         email,
         password,
         rememberMe,
+        captcha,
       })
       .then(response => response.data);
   },

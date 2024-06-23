@@ -180,19 +180,28 @@
       }
     }
   }
+  &__captcha {
+    display: block;
+    margin: 0px 0px 10px 0px;
+    img {
+      display: block;
+      margin: 0px 0px 5px 0px;
+    }
+    input {
+      width: 100%;
+      padding: 5px 0;
+      border-bottom: 1px solid #333a45;
+      font-size: 18px;
+      font-family: "PT-Sans-regular", serif;
+      &::placeholder {
+        font-size: 18px;
+        font-family: "PT-Sans-italic", serif;
+      }
+    }
+  }
 }
 
-.email__error {
-  color: red;
-  margin: 5px 0px 0px 0px;
-}
-
-.password__error {
-  color: red;
-  margin: 5px 0px 0px 0px;
-}
-
-.login__error {
+.error {
   font-size: 18px;
   color: red;
   margin: 5px 0px 0px 0px;
