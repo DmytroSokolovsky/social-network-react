@@ -43,7 +43,7 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
 
   const handleSetStatus = () => {
     setChangeStatus(false);
-    dispatch(updateStatus({ status: statusText, userId: userId }));
+    dispatch(updateStatus(statusText));
   };
 
   return (

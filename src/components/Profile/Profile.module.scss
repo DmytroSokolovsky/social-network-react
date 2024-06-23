@@ -27,6 +27,18 @@ $md4: 479.98px;
   }
   // .header-profile__avatar
   &__avatar {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    label {
+      display: block;
+      cursor: pointer;
+    }
+    &:hover {
+      .header-profile__updatePhoto {
+        transform: translate(-100px, 0px);
+      }
+    }
     img {
       width: 200px;
       height: 200px;
@@ -43,6 +55,23 @@ $md4: 479.98px;
   &__info {
     font-size: 18px;
     font-family: "PT-Sans-regular", serif;
+  }
+  &__updatePhoto {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, 50px);
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    font-family: "PT-Sans-regular-bold", serif;
+    padding: 5px 0 15px 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease 0s;
+  }
+  &__fileInput {
+    display: none;
   }
 }
 .posts-profile {

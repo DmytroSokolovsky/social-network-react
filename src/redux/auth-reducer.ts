@@ -52,6 +52,7 @@ export const getCaptchaUrl = createAsyncThunk(
     try {
       const data = await securityAPI.getCaptchaUrl();
       let captchaUrl = data.url;
+      dispatch(setCaptchaUrl(captchaUrl));
       return captchaUrl;
     } catch (error) {
       if (error instanceof Error) {
@@ -78,6 +79,7 @@ export const logout = createAsyncThunk(
             isAuth: false,
           }),
         );
+        dispatch(setCaptchaUrl(null));
       } else {
         throw new Error('Logout Error');
       }
@@ -170,6 +172,9 @@ const authSlice = createSlice({
       state.login = login;
       state.isAuth = isAuth;
     },
+    setCaptchaUrl(state, action: PayloadAction<string | null>) {
+      state.captchaUrl = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(getAuthUserData.pending, (state, action) => {
@@ -202,7 +207,6 @@ const authSlice = createSlice({
     });
     builder.addCase(logout.fulfilled, (state, { payload }) => {
       state.logoutStatus = 'resolved';
-      state.captchaUrl = null;
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.logoutStatus = 'rejected';
@@ -213,21 +217,19 @@ const authSlice = createSlice({
       state.captchaStatus = 'loading';
       state.loginStatus = 'rejected';
       state.captchaErrorMessage = null;
-      state.captchaUrl = null;
     });
     builder.addCase(getCaptchaUrl.fulfilled, (state, action) => {
       state.captchaStatus = 'resolved';
       state.loginStatus = 'rejected';
-      state.captchaUrl = action.payload;
     });
     builder.addCase(getCaptchaUrl.rejected, (state, action) => {
+      state.captchaStatus = 'rejected';
       state.loginStatus = 'rejected';
       state.captchaErrorMessage = action.payload as string;
-      state.captchaStatus = 'rejected';
     });
   },
 });
 
-export const { setAuthUserData } = authSlice.actions;
+export const { setAuthUserData, setCaptchaUrl } = authSlice.actions;
 
 export default authSlice.reducer;

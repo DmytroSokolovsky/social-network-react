@@ -2,8 +2,12 @@ import cn from 'classnames';
 import s from './../Profile.module.scss';
 import profileAvatar from '../../../images/profile__avatar.png';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { useEffect } from 'react';
-import { getProfileUserData, getStatus } from '../../../redux/profile-reducer';
+import { ChangeEvent, useEffect } from 'react';
+import {
+  getProfileUserData,
+  getStatus,
+  updatePhoto,
+} from '../../../redux/profile-reducer';
 import { useParams } from 'react-router-dom';
 import { getId, getIsAuth } from '../../../redux/selectors/auth-selector';
 import {
@@ -14,6 +18,8 @@ import {
   getSetStatusStatus,
   getStatusErrorMessage,
   getStatusStatus,
+  getUpdatePhotoErrorMessage,
+  getUpdatePhotoStatus,
 } from '../../../redux/selectors/profile-selector';
 import { Toast } from '../../Toast/Toast';
 import { ProfileStatus } from './ProfileStatus/ProfileStatus';
@@ -34,11 +40,16 @@ export const ProfileInfo = () => {
   const setStatusStatus = useAppSelector(getSetStatusStatus);
   const setStatusErrorMessage = useAppSelector(getSetStatusErrorMessage);
 
+  const updatePhotoStatus = useAppSelector(getUpdatePhotoStatus);
+  const updatePhotoErrorMessage = useAppSelector(getUpdatePhotoErrorMessage);
+
   let { userId } = useParams<{ userId?: any }>();
 
   if (!userId) {
     userId = id;
   }
+
+  let userProfile = userId === id;
 
   useEffect(() => {
     if (userId !== null) {
@@ -47,15 +58,44 @@ export const ProfileInfo = () => {
     }
   }, [userId, dispatch]);
 
+  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target?.files?.length) {
+      dispatch(updatePhoto(e.target.files[0]));
+    }
+  };
+
   return (
     <>
       <div className={profileHeader}>
         <div className={s['header-profile__column']}>
           <div className={s['header-profile__avatar']}>
-            {profileDescription?.photos?.large && isAuth ? (
-              <img src={profileDescription?.photos?.large} alt="" />
+            {userProfile ? (
+              <label htmlFor="file-input">
+                {profileDescription?.photos?.large && isAuth ? (
+                  <img src={profileDescription?.photos?.large} alt="" />
+                ) : (
+                  <img src={profileAvatar} alt="" />
+                )}
+                <div className={s['header-profile__updatePhoto']}>
+                  <span>Update photo</span>
+                </div>
+              </label>
             ) : (
-              <img src={profileAvatar} alt="" />
+              <>
+                {profileDescription?.photos?.large && isAuth ? (
+                  <img src={profileDescription?.photos?.large} alt="" />
+                ) : (
+                  <img src={profileAvatar} alt="" />
+                )}
+              </>
+            )}
+            {userProfile && (
+              <input
+                id="file-input"
+                className={s['header-profile__fileInput']}
+                type="file"
+                onChange={handleFile}
+              />
             )}
           </div>
           <ProfileStatus id={id} userId={userId} />
@@ -92,6 +132,9 @@ export const ProfileInfo = () => {
       )}
       {setStatusStatus === 'rejected' && profileStatus !== 'rejected' && (
         <Toast errorMessage={setStatusErrorMessage} />
+      )}
+      {updatePhotoStatus === 'rejected' && profileStatus !== 'rejected' && (
+        <Toast errorMessage={updatePhotoErrorMessage} />
       )}
     </>
   );

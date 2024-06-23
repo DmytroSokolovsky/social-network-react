@@ -18,3 +18,8 @@ export const getSetStatusStatus = (state: RootState) =>
   state.profile.setStatusStatus;
 export const getSetStatusErrorMessage = (state: RootState) =>
   state.profile.setStatusErrorMessage;
+
+export const getUpdatePhotoErrorMessage = (state: RootState) =>
+  state.profile.updatePhotoErrorMessage;
+export const getUpdatePhotoStatus = (state: RootState) =>
+  state.profile.updatePhotoStatus;

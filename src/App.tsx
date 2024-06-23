@@ -1,7 +1,7 @@
 import './App.module.scss';
 import s from './App.module.scss';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import { Suspense } from 'react';
 import { Preloader } from './components/Preloader/Preloader';
 
