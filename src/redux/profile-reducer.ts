@@ -1,8 +1,9 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ProfileType } from '../types/types';
-import { profileAPI } from '../api/profile-api';
+import { SetProfileType, profileAPI } from '../api/profile-api';
 import axios from 'axios';
-import { ResultCodesEnum } from '../api/api';
+import { APIResponseType, ResultCodesEnum } from '../api/api';
+import { RootState } from './store';
 
 let idCounter = 1;
 
@@ -100,6 +101,36 @@ export const updateStatus = createAsyncThunk(
   },
 );
 
+export const updateProfile = createAsyncThunk<
+  APIResponseType,
+  SetProfileType,
+  { state: RootState }
+>(
+  'auth/updateProfile',
+  async (profileData, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const data = await profileAPI.updateProfile(profileData);
+      if (data.resultCode === ResultCodesEnum.Success) {
+        const id = getState().auth.id;
+        if (id !== null) {
+          console.log(id);
+          console.log(data);
+          dispatch(getProfileUserData(id));
+        }
+        return data;
+      } else {
+        throw new Error(data.messages[0]);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      } else {
+        return rejectWithValue('An unknown error occurred!');
+      }
+    }
+  },
+);
+
 type profileStatusType = 'loading' | 'resolved' | 'rejected';
 
 interface ProfileState {
@@ -114,6 +145,8 @@ interface ProfileState {
   setStatusErrorMessage: string | null;
   updatePhotoStatus: profileStatusType | null;
   updatePhotoErrorMessage: string | null;
+  updateProfileStatus: profileStatusType | null;
+  updateProfileErrorMessage: string | null;
 }
 
 const initialState: ProfileState = {
@@ -128,6 +161,8 @@ const initialState: ProfileState = {
   setStatusErrorMessage: null,
   updatePhotoStatus: null,
   updatePhotoErrorMessage: null,
+  updateProfileStatus: null,
+  updateProfileErrorMessage: null,
 };
 
 const profileSlice = createSlice({
@@ -199,6 +234,18 @@ const profileSlice = createSlice({
     builder.addCase(updatePhoto.rejected, (state, action) => {
       state.updatePhotoStatus = 'rejected';
       state.updatePhotoErrorMessage = action.payload as string;
+    });
+
+    builder.addCase(updateProfile.pending, (state, action) => {
+      state.updateProfileStatus = 'loading';
+      state.updateProfileErrorMessage = null;
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.updateProfileStatus = 'resolved';
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
+      state.updateProfileStatus = 'rejected';
+      state.updateProfileErrorMessage = action.payload as string;
     });
   },
 });

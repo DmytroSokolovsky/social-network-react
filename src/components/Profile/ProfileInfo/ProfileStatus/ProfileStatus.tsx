@@ -46,11 +46,15 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
     dispatch(updateStatus(statusText));
   };
 
+  const handleClose = () => {
+    setChangeStatus(false);
+  };
+
   return (
     <>
       {profileStatus === 'resolved' && isAuth && (
         <div className={profileStatusClass}>
-          <div className={s['profile-status__text']}>Status:</div>
+          <div className={s['profile-status__text']}>Status</div>
           {!changeStatus && (
             <div className={statusClass} onDoubleClick={handleStatus}>
               {status
@@ -69,12 +73,20 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
                   placeholder="Enter your status..."
                 ></textarea>
               </div>
-              <button
-                className={s['profile-status__button']}
-                onClick={handleSetStatus}
-              >
-                <span>Save</span>
-              </button>
+              <div className={s['profile-status__buttons']}>
+                <button
+                  className={s['profile-status__save']}
+                  onClick={handleSetStatus}
+                >
+                  <span>Save</span>
+                </button>
+                <button
+                  className={s['profile-status__cancel']}
+                  onClick={handleClose}
+                >
+                  <span>Cancel</span>
+                </button>
+              </div>
             </>
           )}
         </div>

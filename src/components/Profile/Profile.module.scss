@@ -10,7 +10,7 @@ $md4: 479.98px;
   width: 100%;
   // .profile__header
   &__header {
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 10px 0px;
   }
   // .profile__posts
   &__posts {
@@ -51,10 +51,8 @@ $md4: 479.98px;
     font-size: 18px;
     font-family: "PT-Sans-regular", serif;
   }
-  // .header-profile__info
-  &__info {
-    font-size: 18px;
-    font-family: "PT-Sans-regular", serif;
+  // .header-profile__description
+  &__description {
   }
   &__updatePhoto {
     position: absolute;
@@ -154,14 +152,222 @@ $md4: 479.98px;
       background-color: #333a45;
       width: 100%;
       font-size: 18px;
-      font-family: "PT-Sans-regular", serif;
+      font-family: "PT-Sans-italic", serif;
       resize: vertical;
       color: #fff;
       min-height: 100px;
+      padding: 5px 10px;
+      &::placeholder {
+      }
     }
     margin: 0px 0px 5px 0px;
   }
-  &__button {
+  &__buttons {
+    display: flex;
+  }
+  &__save {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: #fff;
+    font-family: "PT-Sans-regular-bold", serif;
+    font-size: 18px;
+    border: 2px solid #fff;
+    margin: 0px 10px 0px 0px;
+    span {
+      display: block;
+      padding: 5px 10px;
+      color: #23272f;
+      transition: all 0.3s ease 0s;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      scale: 0;
+      background-color: #23272f;
+      transition: all 0.3s ease 0s;
+    }
+    &:hover {
+      &:after {
+        scale: 1;
+      }
+      span {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+      }
+    }
+  }
+  &__cancel {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: #23272f;
+    font-family: "PT-Sans-regular-bold", serif;
+    font-size: 18px;
+    border: 2px solid #fff;
+    span {
+      display: block;
+      padding: 5px 10px;
+      color: #fff;
+      transition: all 0.3s ease 0s;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      scale: 0;
+      background-color: #fff;
+      transition: all 0.3s ease 0s;
+    }
+    &:hover {
+      &:after {
+        scale: 1;
+      }
+      span {
+        position: relative;
+        z-index: 2;
+        color: #23272f;
+      }
+    }
+  }
+}
+
+.profile-description__info.profile-description__info_user.profile-description__info_active {
+  cursor: pointer;
+  font-family: "PT-Sans-regular-bold", serif;
+  font-size: 18px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-right: none;
+  span {
+    color: #23272f;
+  }
+}
+
+.profile-description {
+  // .profile-description__title
+  &__title {
+    display: flex;
+    margin: 0px 0px 10px 0px;
+    align-items: center;
+  }
+  // .profile-description__info
+  &__info {
+    span {
+      color: #fff;
+      font-size: 24px;
+      font-family: "PT-Sans-regular-bold", serif;
+    }
+    &_user {
+      padding: 5px 10px;
+      background-color: #23272f;
+      border: 2px solid #fff;
+      border-right: none;
+      cursor: pointer;
+      span {
+        color: #fff;
+      }
+    }
+    &_active {
+      span {
+      }
+    }
+  }
+  // .profile-description__update
+  &__update {
+    font-family: "PT-Sans-regular-bold", serif;
+    font-size: 24px;
+    padding: 5px 10px;
+    border: 2px solid #fff;
+    border-left: none;
+    cursor: pointer;
+    span {
+    }
+    &_active {
+      background-color: #fff;
+      span {
+        color: #23272f;
+      }
+    }
+  }
+  // .profile-description__general
+  &__general {
+    margin: 0px 0px 10px 0px;
+  }
+  &__line {
+    font-size: 18px;
+    margin: 0px 0px 5px 0px;
+    span {
+      font-family: "PT-Sans-italic-bold", serif;
+    }
+  }
+  // .profile-description__contacts
+  &__contacts {
+  }
+}
+.profile-contacts {
+  // .profile-contacts__title
+  &__title {
+    font-size: 18px;
+    font-family: "PT-Sans-italic-bold", serif;
+    margin: 0px 0px 5px 0px;
+  }
+  // .profile-contacts__line
+  &__line {
+    margin: 0px 0px 5px 10px;
+    font-size: 18px;
+    span {
+      font-family: "PT-Sans-italic-bold", serif;
+    }
+  }
+}
+
+.profile-description {
+  // .profile-description__edit
+  &__form {
+  }
+  // .profile-description__row
+  &__row {
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 10px 0px;
+    &:last-child {
+      justify-content: flex-end;
+    }
+  }
+  // .profile-description__name
+  &__name {
+    font-family: "PT-Sans-italic-bold", serif;
+    margin: 0px 10px 0px 0px;
+    min-width: 150px;
+    font-size: 18px;
+  }
+  // .profile-description__value
+  &__value {
+    width: 100%;
+    input[type="checkbox"] {
+      width: 25px;
+      height: 25px;
+    }
+    input {
+      font-size: 18px;
+      width: 100%;
+      background-color: #333a45;
+      color: #fff;
+      padding: 5px 10px;
+    }
+  }
+  &__submit {
+    margin: 0px 10px 0px 0px;
     display: block;
     position: relative;
     cursor: pointer;
@@ -183,7 +389,7 @@ $md4: 479.98px;
       width: 100%;
       height: 100%;
       scale: 0;
-      background-color: #333a45;
+      background-color: #23272f;
       transition: all 0.3s ease 0s;
     }
     &:hover {
@@ -194,6 +400,42 @@ $md4: 479.98px;
         position: relative;
         z-index: 2;
         color: #fff;
+      }
+    }
+  }
+  &__cancel {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: #23272f;
+    font-family: "PT-Sans-regular-bold", serif;
+    font-size: 18px;
+    border: 2px solid #fff;
+    span {
+      display: block;
+      padding: 5px 10px;
+      color: #fff;
+      transition: all 0.3s ease 0s;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      scale: 0;
+      background-color: #fff;
+      transition: all 0.3s ease 0s;
+    }
+    &:hover {
+      &:after {
+        scale: 1;
+      }
+      span {
+        position: relative;
+        z-index: 2;
+        color: #23272f;
       }
     }
   }

@@ -1,4 +1,4 @@
-interface ContactsType {
+export interface ContactsType {
   github: string;
   vk: string;
   facebook: string;

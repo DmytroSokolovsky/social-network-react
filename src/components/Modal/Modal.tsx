@@ -19,7 +19,7 @@ interface ModalPropsType {
   setModalOpen: (boolean: boolean) => void;
 }
 
-interface FormData {
+interface LoginFormData {
   email: string;
   password: string;
   rememberMe: boolean;
@@ -41,7 +41,7 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<FormData>({
+  } = useForm<LoginFormData>({
     mode: 'onBlur',
   });
 

@@ -1,4 +1,4 @@
-import { ProfileType } from '../types/types';
+import { ContactsType, ProfileType } from '../types/types';
 import { APIResponseType, instance } from './api';
 
 interface PhotosType {
@@ -8,6 +8,15 @@ interface PhotosType {
 
 interface SavePhotoResponseDataType {
   photos: PhotosType;
+}
+
+export interface SetProfileType {
+  userId: number;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  contacts: ContactsType;
+  aboutMe: string;
 }
 
 export const profileAPI = {
@@ -45,6 +54,12 @@ export const profileAPI = {
           },
         },
       )
+      .then(response => response.data);
+  },
+
+  updateProfile(profileData: SetProfileType) {
+    return instance
+      .put<APIResponseType>(`profile`, profileData)
       .then(response => response.data);
   },
 };

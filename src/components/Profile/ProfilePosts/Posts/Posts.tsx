@@ -10,14 +10,12 @@ export const Posts = ({ posts }: PostsPropsType) => {
       {[...posts].reverse().map(post => {
         return <Post key={post.id} text={post.text} />;
       })}
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
-      <Post text={'Перший пост!'} />
+      <Post text={'First post!'} />
+      <Post text={'Second post!'} />
+      <Post text={'Third post!'} />
+      <Post text={'Fourth post'} />
+      <Post text={'Fifth post!'} />
+      <Post text={'Sixth post!'} />
     </>
   );
 };
