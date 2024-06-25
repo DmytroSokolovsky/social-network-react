@@ -1,0 +1,15 @@
+.error {
+  margin-left: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #23272f;
+  height: calc(100vh - 80px);
+  span {
+    font-size: 18px;
+    background-color: #333a45;
+    padding: 15px 20px;
+    font-family: "PT-Sans-regular-bold", serif;
+  }
+}

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import headerLogo from '../../images/header__logo.png';
 import headerHuman from '../../images/header_actions.png';
 import { useEffect, useState } from 'react';
@@ -16,16 +16,15 @@ import {
 import { Preloader } from '../Preloader/Preloader';
 import { Toast } from '../Toast/Toast';
 import cn from 'classnames';
-import { Modal } from '../Modal/Modal';
 
 interface HeaderPropsType {
   menuOpen: boolean;
   setMenuOpen: (open: boolean | ((prevOpen: boolean) => boolean)) => void;
+  open: boolean;
+  setOpen: (open: boolean | ((prevOpen: boolean) => boolean)) => void;
 }
 
-const Header = ({ menuOpen, setMenuOpen }: HeaderPropsType) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+const Header = ({ menuOpen, setMenuOpen, open, setOpen }: HeaderPropsType) => {
   const dispatch = useAppDispatch();
   const login = useAppSelector(getLogin);
   const authMeStatus = useAppSelector(getAuthMeStatus);
@@ -35,21 +34,31 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderPropsType) => {
   const logoutStatus = useAppSelector(getLogoutStatus);
   const logoutMessage = useAppSelector(getLogoutMessage);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     dispatch(getAuthUserData());
   }, [dispatch]);
 
-  const handleOpen = () => {
+  const handleToggleOpen = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
     setOpen(prevOpen => !prevOpen);
+  };
+
+  const handleOpen = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setOpen(true);
   };
 
   const handleExit = () => {
     dispatch(logout());
+    navigate('/login', { state: { from: location.pathname } });
     setOpen(prevOpen => !prevOpen);
   };
 
   const handleSingIn = () => {
-    setModalOpen(true);
+    navigate('/login', { state: { from: location.pathname } });
   };
 
   let actionsClass = cn(s.header__actions, s['actions-header'], {
@@ -84,9 +93,9 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderPropsType) => {
             {authMeStatus === 'resolved' && isAuth ? (
               <>
                 <div className={s.header__human}>
-                  <img src={headerHuman} alt="" onClick={handleOpen} />
+                  <img src={headerHuman} alt="" onClick={handleToggleOpen} />
                 </div>
-                <div className={actionsClass}>
+                <div className={actionsClass} onClick={handleOpen}>
                   <div className={s['actions-header__body']}>
                     <ul className={s['actions-header__list']}>
                       <li>
@@ -115,7 +124,6 @@ const Header = ({ menuOpen, setMenuOpen }: HeaderPropsType) => {
       {authMeStatus === 'rejected' && (
         <Toast errorMessage={authMeErrorMessage} />
       )}
-      {modalOpen && <Modal setModalOpen={setModalOpen} />}
       {logoutStatus === 'rejected' && <Toast errorMessage={logoutMessage} />}
     </>
   );

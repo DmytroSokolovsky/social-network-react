@@ -14,10 +14,7 @@ import {
   getCaptchaStatus,
   getCaptchaErrorMessage,
 } from '../../redux/selectors/auth-selector';
-
-interface ModalPropsType {
-  setModalOpen: (boolean: boolean) => void;
-}
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface LoginFormData {
   email: string;
@@ -26,7 +23,7 @@ interface LoginFormData {
   captcha: string;
 }
 
-export const Modal = ({ setModalOpen }: ModalPropsType) => {
+const Modal = () => {
   const [passwordOpen, setPasswordOpen] = useState<boolean>(false);
   const loginStatus = useAppSelector(getLoginStatus);
   const loginMessage = useAppSelector(getLoginMessage);
@@ -35,6 +32,9 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
   const captchaErrorMessage = useAppSelector(getCaptchaErrorMessage);
 
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -49,8 +49,10 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
     setPasswordOpen(prevpasswordOpen => !prevpasswordOpen);
   };
 
+  const from = location.state?.from || '/';
+
   const handleClose = () => {
-    setModalOpen(false);
+    navigate(from, { replace: true });
   };
 
   const onSubmit = handleSubmit(data => {
@@ -58,7 +60,7 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
     dispatch(login(data));
 
     if (loginStatus === 'resolved') {
-      setModalOpen(false);
+      navigate(from, { replace: true });
       reset();
     }
   });
@@ -174,3 +176,5 @@ export const Modal = ({ setModalOpen }: ModalPropsType) => {
     document.body,
   );
 };
+
+export default Modal;

@@ -116,6 +116,11 @@ h6 {
   font-weight: inherit;
 }
 
+body {
+  background-color: #333a45;
+  position: relative;
+}
+
 .wrapper {
   width: 100%;
   min-height: 100%;
@@ -131,9 +136,4 @@ h6 {
   padding: 80px 0px 0px 0px;
   display: flex;
   align-items: flex-start;
-}
-
-body {
-  background-color: #333a45;
-  position: relative;
 }

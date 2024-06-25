@@ -9,7 +9,7 @@ export interface ContactsType {
   mainLink: string;
 }
 
-interface PhotosType {
+export interface PhotosType {
   small: string | null;
   large: string | null;
 }

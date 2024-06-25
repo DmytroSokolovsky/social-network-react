@@ -7,13 +7,15 @@ $fontfamily: "PT-Sans-regular";
 
 .sidebar {
   background-color: #23272f;
+  position: fixed;
+  top: 80px;
+  width: 120px;
   @media (max-width: $md3) {
     position: fixed;
     width: 100%;
     height: calc(100% - 80px);
     z-index: 4;
     overflow: auto;
-    top: 80px;
     left: 0;
     background-color: rgba(#23272f, 0.98);
     transition: transform 0.3s ease;
@@ -45,6 +47,7 @@ $fontfamily: "PT-Sans-regular";
     color: #fff;
     font-size: 18px;
     font-family: "PT-Sans-regular-bold", serif;
+    transition: all 0.3s ease 0s;
     @media (max-width: $md3) {
       font-size: 28px;
     }

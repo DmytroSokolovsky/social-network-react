@@ -65,7 +65,9 @@ export const ProfileInfo = () => {
       <div className={profileHeader}>
         <div className={s['header-profile__column']}>
           <ProfileAvatar userProfile={userProfile} />
-          <ProfileStatus id={id} userId={userId} />
+          {profileStatus === 'resolved' && isAuth && (
+            <ProfileStatus id={id} userId={userId} />
+          )}
         </div>
         {profileStatus === 'resolved' && isAuth && (
           <div className={s['header-profile__column']}>

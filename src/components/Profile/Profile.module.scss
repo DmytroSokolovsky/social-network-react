@@ -5,9 +5,13 @@ $md3: 767.98px;
 $md4: 479.98px;
 
 .profile {
+  margin-left: 120px;
   padding: 15px 20px;
   background-color: #23272f;
   width: 100%;
+  @media (max-width: $md3) {
+    margin-left: 0;
+  }
   // .profile__header
   &__header {
     margin: 0px 0px 10px 0px;
@@ -232,6 +236,7 @@ $md4: 479.98px;
     padding: 5px 10px;
     max-width: 200px;
     min-height: 30px;
+    line-height: 22px;
     @media (max-width: 650px) {
       max-width: 100%;
       margin: 0px auto;

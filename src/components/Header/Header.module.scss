@@ -135,6 +135,7 @@ $fontfamily: "PT-Sans-regular";
 
 .actions-header {
   opacity: 0;
+  visibility: hidden;
   position: absolute;
   top: 100%;
   right: 15px;
@@ -147,6 +148,7 @@ $fontfamily: "PT-Sans-regular";
   &.open {
     transform: translate(0px, 0px);
     opacity: 1;
+    visibility: visible;
   }
   &__body {
     padding: 5px 10px;

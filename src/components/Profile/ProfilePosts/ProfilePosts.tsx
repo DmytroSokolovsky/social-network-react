@@ -7,7 +7,6 @@ import { getPosts } from '../../../redux/selectors/profile-selector';
 import { addPost } from '../../../redux/profile-reducer';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { getIsAuth } from '../../../redux/selectors/auth-selector';
-import { Modal } from '../../Modal/Modal';
 
 export const ProfilePosts = () => {
   const posts = useAppSelector(getPosts);
@@ -29,11 +28,9 @@ export const ProfilePosts = () => {
     }
   };
 
-  const [modalOpen, setModalOpen] = useState<boolean>(true);
-
   return (
     <>
-      {isAuth ? (
+      {isAuth && (
         <div className={profilePosts}>
           <AddPost
             handleText={handleText}
@@ -42,8 +39,6 @@ export const ProfilePosts = () => {
           />
           <Posts posts={posts} />
         </div>
-      ) : (
-        modalOpen && <Modal setModalOpen={setModalOpen} />
       )}
     </>
   );

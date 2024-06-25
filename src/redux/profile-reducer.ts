@@ -7,11 +7,6 @@ import { RootState } from './store';
 
 let idCounter = 1;
 
-interface PostsType {
-  id: number;
-  text: string;
-}
-
 export const getProfileUserData = createAsyncThunk(
   'auth/getProfileUserData',
   async (userId: number, { dispatch, rejectWithValue }) => {
@@ -128,6 +123,11 @@ export const updateProfile = createAsyncThunk<
     }
   },
 );
+
+interface PostsType {
+  id: number;
+  text: string;
+}
 
 type profileStatusType = 'loading' | 'resolved' | 'rejected';
 

@@ -61,54 +61,52 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
 
   return (
     <>
-      {profileStatus === 'resolved' && isAuth && (
-        <div className={profileStatusClass}>
-          <div className={s['profile-status__top']}>
-            <div className={statusTextClass} onClick={handleClose}>
-              <span>Status</span>
-            </div>
-            {userProfile && (
-              <div className={editClass} onClick={handleStatus}>
-                <span>Edit</span>
-              </div>
-            )}
+      <div className={profileStatusClass}>
+        <div className={s['profile-status__top']}>
+          <div className={statusTextClass} onClick={handleClose}>
+            <span>Status</span>
           </div>
-          {!changeStatus && (
-            <div className={statusClass} onDoubleClick={handleStatus}>
-              {status
-                ? status
-                : !status && userProfile
-                ? 'DoubleClick to enter your status...'
-                : ''}
+          {userProfile && (
+            <div className={editClass} onClick={handleStatus}>
+              <span>Edit</span>
             </div>
-          )}
-          {changeStatus && (
-            <>
-              <div className={s['profile-status__textarea']}>
-                <textarea
-                  onChange={handleChangeStatus}
-                  value={statusText}
-                  placeholder="Enter your status..."
-                ></textarea>
-              </div>
-              <div className={s['profile-status__buttons']}>
-                <button
-                  className={s['profile-status__save']}
-                  onClick={handleSetStatus}
-                >
-                  <span>Save</span>
-                </button>
-                <button
-                  className={s['profile-status__cancel']}
-                  onClick={handleClose}
-                >
-                  <span>Cancel</span>
-                </button>
-              </div>
-            </>
           )}
         </div>
-      )}
+        {!changeStatus && (
+          <div className={statusClass} onDoubleClick={handleStatus}>
+            {status
+              ? status
+              : !status && userProfile
+              ? 'DoubleClick to enter your status...'
+              : ''}
+          </div>
+        )}
+        {changeStatus && (
+          <>
+            <div className={s['profile-status__textarea']}>
+              <textarea
+                onChange={handleChangeStatus}
+                value={statusText}
+                placeholder="Enter your status..."
+              ></textarea>
+            </div>
+            <div className={s['profile-status__buttons']}>
+              <button
+                className={s['profile-status__save']}
+                onClick={handleSetStatus}
+              >
+                <span>Save</span>
+              </button>
+              <button
+                className={s['profile-status__cancel']}
+                onClick={handleClose}
+              >
+                <span>Cancel</span>
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };

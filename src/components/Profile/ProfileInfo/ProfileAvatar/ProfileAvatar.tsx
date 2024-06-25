@@ -23,7 +23,7 @@ export const ProfileAvatar = ({ userProfile }: ProfileAvatarPropsType) => {
 
   return (
     <div className={s['header-profile__avatar']}>
-      {userProfile ? (
+      {userProfile && isAuth && (
         <label htmlFor="file-input">
           {profileDescription?.photos?.large && isAuth ? (
             <img src={profileDescription?.photos?.large} alt="" />
@@ -34,7 +34,9 @@ export const ProfileAvatar = ({ userProfile }: ProfileAvatarPropsType) => {
             <span>Update photo</span>
           </div>
         </label>
-      ) : (
+      )}
+      {userProfile && !isAuth && <img src={profileAvatar} alt="" />}
+      {!userProfile && (
         <>
           {profileDescription?.photos?.large && isAuth ? (
             <img src={profileDescription?.photos?.large} alt="" />

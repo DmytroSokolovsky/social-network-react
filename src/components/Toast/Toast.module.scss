@@ -14,7 +14,7 @@ $fontfamily: "PT-Sans-regular";
   bottom: 0;
   left: 50%;
   transition: all 0.3s ease 0s;
-  z-index: 12;
+  z-index: 25;
   transform: translate(-50%, 100px);
   @media (max-width: $md4) {
     width: 100%;
