@@ -18,7 +18,12 @@ import { Toast } from '../Toast/Toast';
 import cn from 'classnames';
 import { Modal } from '../Modal/Modal';
 
-const Header = () => {
+interface HeaderPropsType {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean | ((prevOpen: boolean) => boolean)) => void;
+}
+
+const Header = ({ menuOpen, setMenuOpen }: HeaderPropsType) => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -51,13 +56,28 @@ const Header = () => {
     [s.open]: open,
   });
 
+  let menuClass = cn(s.header__menu, {
+    [s.active]: menuOpen,
+  });
+
+  const handleOpenMenu = () => {
+    setMenuOpen(prevOpen => !prevOpen);
+  };
+
   return (
     <>
       <div className={s.header}>
         <div className={s.header__body}>
           <div className={s.header__column}>
+            <nav className={menuClass} onClick={handleOpenMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </nav>
+          </div>
+          <div className={s.header__column}>
             <Link to="/" className={s.header__logo}>
-              <img src={headerLogo} alt="Зображення соціальної мережі" />
+              <img src={headerLogo} alt="React-application" />
             </Link>
           </div>
           <div className={s.header__column}>

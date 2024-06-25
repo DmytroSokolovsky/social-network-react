@@ -22,12 +22,6 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
   const [statusText, setStatusText] = useState<string>('');
   const [changeStatus, setChangeStatus] = useState<boolean>(false);
 
-  let statusClass = cn(s['profile-status__status'], {
-    [s['profile-status__placeholder']]: !status,
-  });
-
-  let profileStatusClass = cn(s['header-profile__status'], s['profile-status']);
-
   let userProfile = userId === id;
 
   const handleStatus = () => {
@@ -50,11 +44,35 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
     setChangeStatus(false);
   };
 
+  let statusClass = cn(s['profile-status__status'], {
+    [s['profile-status__placeholder']]: !status,
+  });
+
+  let profileStatusClass = cn(s['header-profile__status'], s['profile-status']);
+
+  let statusTextClass = cn(s['profile-status__text'], {
+    [s['profile-status__text_user']]: userProfile,
+    [s['profile-status__text_active']]: !changeStatus,
+  });
+
+  let editClass = cn(s['profile-status__update'], {
+    [s['profile-status__update_active']]: changeStatus,
+  });
+
   return (
     <>
       {profileStatus === 'resolved' && isAuth && (
         <div className={profileStatusClass}>
-          <div className={s['profile-status__text']}>Status</div>
+          <div className={s['profile-status__top']}>
+            <div className={statusTextClass} onClick={handleClose}>
+              <span>Status</span>
+            </div>
+            {userProfile && (
+              <div className={editClass} onClick={handleStatus}>
+                <span>Edit</span>
+              </div>
+            )}
+          </div>
           {!changeStatus && (
             <div className={statusClass} onDoubleClick={handleStatus}>
               {status

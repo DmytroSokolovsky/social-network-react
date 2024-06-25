@@ -87,7 +87,7 @@ export const EditDescription = ({
       <div className={s['profile-description__row']}>
         <div className={s['profile-description__name']}>About me: </div>
         <div className={s['profile-description__value']}>
-          <input type="text" {...register('aboutMe')} />
+          <textarea {...register('aboutMe')} />
         </div>
       </div>
       <div className={s['profile-description__row']}>
@@ -103,7 +103,7 @@ export const EditDescription = ({
           Looking for a job description:{' '}
         </div>
         <div className={s['profile-description__value']}>
-          <input type="text" {...register('lookingForAJobDescription')} />
+          <textarea {...register('lookingForAJobDescription')} />
         </div>
       </div>
       <div className={s['profile-description__row']}>

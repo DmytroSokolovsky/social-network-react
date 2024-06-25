@@ -1,13 +1,24 @@
+$mwContainer: 1400px;
+$md1: $mwContainer + 12px;
+$md2: 992.98px;
+$md3: 767.98px;
+$md4: 479.98px;
+$fontfamily: "PT-Sans-regular";
+
 .toast {
   background-color: #00d8ff;
   font-size: 18px;
   color: #fff;
   padding: 10px 20px;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 50%;
   transition: all 0.3s ease 0s;
-  transform: translate(-50%, -100px);
+  z-index: 12;
+  transform: translate(-50%, 100px);
+  @media (max-width: $md4) {
+    width: 100%;
+  }
   &.open {
     transform: translate(-50%, 0px);
   }

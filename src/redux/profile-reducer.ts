@@ -113,8 +113,6 @@ export const updateProfile = createAsyncThunk<
       if (data.resultCode === ResultCodesEnum.Success) {
         const id = getState().auth.id;
         if (id !== null) {
-          console.log(id);
-          console.log(data);
           dispatch(getProfileUserData(id));
         }
         return data;

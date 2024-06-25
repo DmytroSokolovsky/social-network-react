@@ -1,6 +1,16 @@
+$mwContainer: 1400px;
+$md1: $mwContainer + 12px;
+$md2: 992.98px;
+$md3: 767.98px;
+$md4: 479.98px;
+$fontfamily: "PT-Sans-regular";
+
 .header {
   background-color: #23272f;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  max-width: 1400px;
+  z-index: 8;
   padding: 0 15px;
   height: 80px;
   display: flex;
@@ -14,6 +24,54 @@
   }
   // .header__column
   &__column {
+    &:first-child {
+      display: none;
+      @media (max-width: $md3) {
+        display: block;
+      }
+    }
+  }
+  &__menu {
+    width: 35px;
+    height: 28px;
+    position: relative;
+    span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      transition: all 0.3s ease 0s;
+    }
+    span {
+      &:nth-child(1) {
+        top: 0;
+      }
+      &:nth-child(2) {
+        top: 50%;
+        transform: translate(0, -1px);
+        opacity: 1;
+        transition: all 0.3s ease 0s;
+      }
+      &:nth-child(3) {
+        bottom: 0;
+      }
+    }
+    &.active {
+      span {
+      }
+      span {
+        &:nth-child(1) {
+          transform: translateY(13px) rotate(-45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: translateY(-13px) rotate(45deg);
+        }
+      }
+    }
   }
   // .header__logo
   &__logo {
@@ -85,6 +143,7 @@
   font-size: 18px;
   transform: translate(0px, 10px);
   transition: all 0.3s ease 0s;
+  z-index: 5;
   &.open {
     transform: translate(0px, 0px);
     opacity: 1;

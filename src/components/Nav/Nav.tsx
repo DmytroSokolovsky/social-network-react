@@ -2,11 +2,23 @@ import s from './Nav.module.scss';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-const Nav = () => {
+interface NavPropsType {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
+}
+
+const Nav = ({ menuOpen, setMenuOpen }: NavPropsType) => {
   let linksClass = cn(s.sidebar__link, s.sidebar__link_active);
+  let sidebarClass = cn(s.sidebar, {
+    [s.active]: menuOpen,
+  });
+
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
+  };
 
   return (
-    <nav className={s.sidebar}>
+    <nav className={sidebarClass}>
       <div className={s.sidebar__body}>
         <ul className={s.sidebar__list}>
           <li>
@@ -15,6 +27,7 @@ const Nav = () => {
               className={({ isActive }) =>
                 isActive ? linksClass : s.sidebar__link
               }
+              onClick={handleCloseMenu}
             >
               Profile
             </NavLink>
@@ -25,6 +38,7 @@ const Nav = () => {
               className={({ isActive }) =>
                 isActive ? linksClass : s.sidebar__link
               }
+              onClick={handleCloseMenu}
             >
               Users
             </NavLink>
@@ -35,6 +49,7 @@ const Nav = () => {
               className={({ isActive }) =>
                 isActive ? linksClass : s.sidebar__link
               }
+              onClick={handleCloseMenu}
             >
               Messages
             </NavLink>
@@ -45,6 +60,7 @@ const Nav = () => {
               className={({ isActive }) =>
                 isActive ? linksClass : s.sidebar__link
               }
+              onClick={handleCloseMenu}
             >
               Chat
             </NavLink>
