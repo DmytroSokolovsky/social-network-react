@@ -9,7 +9,7 @@ export interface UserType {
   followed: boolean;
 }
 
-interface GetUsersResponseType {
+export interface GetUsersResponseType {
   items: Array<UserType>;
   totalCount: number;
   error: string | null;
@@ -18,7 +18,7 @@ interface GetUsersResponseType {
 export const usersAPI = {
   getUsers(
     count = 5,
-    page = 5270,
+    page = 1,
     term: string = '',
     friend: null | boolean = null,
   ) {

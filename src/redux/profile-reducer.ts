@@ -129,21 +129,21 @@ interface PostsType {
   text: string;
 }
 
-type profileStatusType = 'loading' | 'resolved' | 'rejected';
+type ProfileStatusType = 'loading' | 'resolved' | 'rejected';
 
 interface ProfileState {
   posts: PostsType[];
   profile: ProfileType | null;
   profileErrorMessage: string | null;
-  profileStatus: profileStatusType | null;
+  profileStatus: ProfileStatusType | null;
   status: string;
-  statusStatus: profileStatusType | null;
+  statusStatus: ProfileStatusType | null;
   statusErrorMessage: string | null;
-  setStatusStatus: profileStatusType | null;
+  setStatusStatus: ProfileStatusType | null;
   setStatusErrorMessage: string | null;
-  updatePhotoStatus: profileStatusType | null;
+  updatePhotoStatus: ProfileStatusType | null;
   updatePhotoErrorMessage: string | null;
-  updateProfileStatus: profileStatusType | null;
+  updateProfileStatus: ProfileStatusType | null;
   updateProfileErrorMessage: string | null;
 }
 
