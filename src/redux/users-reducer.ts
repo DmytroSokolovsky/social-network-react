@@ -106,7 +106,7 @@ interface FollowingInProgressParametrsType {
 const initialState: UsersStateType = {
   users: null,
   totalCount: null,
-  count: 90,
+  count: 20,
   page: 1,
   isFetching: false,
   following: [],
