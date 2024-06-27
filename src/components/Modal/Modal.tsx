@@ -3,7 +3,7 @@ import s from './Modal.module.scss';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { login } from '../../redux/auth-reducer';
@@ -13,6 +13,7 @@ import {
   getCaptchaUrl,
   getCaptchaStatus,
   getCaptchaErrorMessage,
+  getIsAuth,
 } from '../../redux/selectors/auth-selector';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -30,6 +31,7 @@ const Modal = () => {
   const captchaUrl = useAppSelector(getCaptchaUrl);
   const captchaStatus = useAppSelector(getCaptchaStatus);
   const captchaErrorMessage = useAppSelector(getCaptchaErrorMessage);
+  const isAuth = useAppSelector(getIsAuth);
 
   const dispatch = useAppDispatch();
 
@@ -45,11 +47,18 @@ const Modal = () => {
     mode: 'onBlur',
   });
 
+  const from = location.state?.from || '/';
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
+      reset();
+    }
+  }, [isAuth, navigate, from, reset]);
+
   const handleEye = () => {
     setPasswordOpen(prevpasswordOpen => !prevpasswordOpen);
   };
-
-  const from = location.state?.from || '/';
 
   const handleClose = () => {
     navigate(from, { replace: true });
@@ -58,11 +67,6 @@ const Modal = () => {
   const onSubmit = handleSubmit(data => {
     JSON.stringify(data);
     dispatch(login(data));
-
-    if (loginStatus === 'resolved') {
-      navigate(from, { replace: true });
-      reset();
-    }
   });
 
   let signInClass = cn(s.modal__signIn, {

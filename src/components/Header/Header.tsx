@@ -53,8 +53,10 @@ const Header = ({ menuOpen, setMenuOpen, open, setOpen }: HeaderPropsType) => {
 
   const handleExit = () => {
     dispatch(logout());
-    navigate('/login', { state: { from: location.pathname } });
-    setOpen(prevOpen => !prevOpen);
+    setTimeout(() => {
+      navigate('/login', { state: { from: location.pathname } });
+      setOpen(prevOpen => !prevOpen);
+    }, 100);
   };
 
   const handleSingIn = () => {
