@@ -55,31 +55,50 @@ export const unFollow = createAsyncThunk(
   },
 );
 
+interface getUsersParamsType {
+  count: string;
+  page: string;
+  term: string;
+  friend: string;
+}
+
 export const getUsers = createAsyncThunk<
   GetUsersResponseType,
-  void,
+  getUsersParamsType,
   { state: RootState }
->('auth/getUsers', async (_, { dispatch, rejectWithValue, getState }) => {
-  try {
-    const { count, page } = getState().users;
-    const data = await usersAPI.getUsers(count, page);
-    if (data.error) {
-      throw new Error(data.error[0]);
-    }
-    dispatch(setUsers(data.items));
-    dispatch(setTotalCount(data.totalCount));
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response && error.response.status === 404) {
-        return rejectWithValue('Users not found (404)');
+>(
+  'auth/getUsers',
+  async ({ count, page, term, friend }, { dispatch, rejectWithValue }) => {
+    try {
+      let friendQuery;
+      if (friend === 'null') {
+        friendQuery = null;
       }
-      return rejectWithValue('An error occurred: ' + error.message);
-    } else {
-      return rejectWithValue('An unexpected error occurred');
+      if (friend === 'true') {
+        friendQuery = true;
+      }
+      if (friend === 'false') {
+        friendQuery = false;
+      }
+      const data = await usersAPI.getUsers(+count, +page, term, friendQuery);
+      if (data.error) {
+        throw new Error(data.error[0]);
+      }
+      dispatch(setUsers(data.items));
+      dispatch(setTotalCount(data.totalCount));
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 404) {
+          return rejectWithValue('Users not found (404)');
+        }
+        return rejectWithValue('An error occurred: ' + error.message);
+      } else {
+        return rejectWithValue('An unexpected error occurred');
+      }
     }
-  }
-});
+  },
+);
 
 type UsersStatusType = 'loading' | 'resolved' | 'rejected';
 
@@ -88,6 +107,8 @@ interface UsersStateType {
   totalCount: number | null;
   count: number;
   page: number;
+  friendFilter: string;
+  termFilter: string;
   isFetching: boolean;
   following: Array<number>;
   usersStatus: UsersStatusType | null;
@@ -108,6 +129,8 @@ const initialState: UsersStateType = {
   totalCount: null,
   count: 20,
   page: 1,
+  friendFilter: 'null',
+  termFilter: '',
   isFetching: false,
   following: [],
   usersStatus: null,
@@ -128,8 +151,17 @@ const usersSlice = createSlice({
     setTotalCount(state, action: PayloadAction<number>) {
       state.totalCount = action.payload;
     },
+    setCount(state, action: PayloadAction<number>) {
+      state.count = action.payload;
+    },
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
+    },
+    setFriendFilter(state, action: PayloadAction<string>) {
+      state.friendFilter = action.payload;
+    },
+    setTermFilter(state, action: PayloadAction<string>) {
+      state.termFilter = action.payload;
     },
     followUser(state, action: PayloadAction<number>) {
       const user = state.users?.find(user => user.id === action.payload);
@@ -201,6 +233,9 @@ export const {
   followUser,
   unFollowUser,
   followingInProgress,
+  setFriendFilter,
+  setTermFilter,
+  setCount,
 } = usersSlice.actions;
 
 export default usersSlice.reducer;

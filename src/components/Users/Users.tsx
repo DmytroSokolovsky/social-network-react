@@ -1,12 +1,20 @@
 import { useContext, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { getUsers, setPage } from '../../redux/users-reducer';
+import {
+  getUsers,
+  setCount,
+  setFriendFilter,
+  setPage,
+  setTermFilter,
+} from '../../redux/users-reducer';
 import {
   getCount,
   getFollowErrorMessage,
   getFollowStatus,
   getFollowing,
+  getFriendFilter,
   getPage,
+  getTermFilter,
   getTotalCount,
   getUnFollowErrorMessage,
   getUnFollowStatus,
@@ -21,16 +29,19 @@ import { User } from './User/User';
 import { ThemeContext } from '../../context/context';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
 
 interface FilterFormData {
   term: string;
-  friend: 'all' | 'true' | 'false';
+  friend: string;
+  pageCount: string;
 }
 
 const Users = () => {
   const { register, handleSubmit, reset } = useForm<FilterFormData>({
     defaultValues: {
-      friend: 'all',
+      friend: 'null',
+      pageCount: '20',
     },
   });
 
@@ -51,6 +62,16 @@ const Users = () => {
   const unFollowStatus = useAppSelector(getUnFollowStatus);
   const unFollowErrorMessage = useAppSelector(getUnFollowErrorMessage);
 
+  const friendFilter = useAppSelector(getFriendFilter);
+  const termFilter = useAppSelector(getTermFilter);
+
+  const [searchParams, setSearchParams] = useSearchParams({
+    count: count.toString(),
+    page: currentPage.toString(),
+    term: termFilter,
+    friend: friendFilter,
+  });
+
   let pagesCount;
   let pages = [];
 
@@ -62,12 +83,66 @@ const Users = () => {
     }
   }
 
+  const countQuery = searchParams.get('count') || '';
+  const pageQuery = searchParams.get('page') || '';
+  const termQuery = searchParams.get('term') || '';
+  const friendQuery = searchParams.get('friend') || '';
+
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch, count, currentPage]);
+    dispatch(setFriendFilter(friendQuery));
+    dispatch(setTermFilter(termQuery));
+    dispatch(setPage(+pageQuery));
+    dispatch(setCount(+countQuery));
+
+    setSearchParams({
+      count: countQuery,
+      page: pageQuery,
+      term: termQuery,
+      friend: friendQuery,
+    });
+
+    reset({
+      term: termQuery,
+      friend: friendQuery,
+      pageCount: countQuery,
+    });
+
+    dispatch(
+      getUsers({
+        count: countQuery,
+        page: pageQuery,
+        term: termQuery,
+        friend: friendQuery,
+      }),
+    );
+  }, [
+    countQuery,
+    dispatch,
+    friendQuery,
+    pageQuery,
+    reset,
+    setSearchParams,
+    termQuery,
+  ]);
 
   const handleSetPage = (page: number) => {
     dispatch(setPage(page));
+
+    setSearchParams({
+      count: count.toString(),
+      page: page.toString(),
+      term: termQuery,
+      friend: friendQuery,
+    });
+
+    dispatch(
+      getUsers({
+        count: count.toString(),
+        page: page.toString(),
+        term: termQuery,
+        friend: friendQuery,
+      }),
+    );
   };
 
   const following = useAppSelector(getFollowing);
@@ -78,26 +153,54 @@ const Users = () => {
   });
 
   const onSubmit = handleSubmit(data => {
+    dispatch(setFriendFilter(data.friend));
+    dispatch(setTermFilter(data.term));
+    dispatch(setPage(1));
+    dispatch(setCount(+data.pageCount));
+
     JSON.stringify(data);
-    console.log(data);
+
+    setSearchParams({
+      count: data.pageCount,
+      page: '1',
+      term: data.term,
+      friend: data.friend,
+    });
+
+    dispatch(
+      getUsers({
+        count: data.pageCount,
+        page: '1',
+        term: data.term,
+        friend: data.friend,
+      }),
+    );
   });
 
   return (
     <>
       <div className={usersClass}>
         <form onSubmit={onSubmit}>
-          <input type="text" {...register('term')} />
+          Filter: <input type="text" {...register('term')} />
+          Choose:
           <select {...register('friend')}>
-            <option value="all">All</option>
+            <option value="null">All</option>
             <option value="true">Followed</option>
             <option value="false">Unfollowed</option>
+          </select>
+          Users count on page:
+          <select {...register('pageCount')}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="90">90</option>
           </select>
           <button type="submit">Search</button>
         </form>
         <UsersPaginator
           pages={pages}
           handleSetPage={handleSetPage}
-          currentPage={currentPage}
+          currentPage={+pageQuery}
         />
         <div className={s.users__bottom}>
           {users?.map(user => {

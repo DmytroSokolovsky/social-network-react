@@ -19,3 +19,6 @@ export const getUnFollowErrorMessage = (state: RootState) =>
   state.users.unFollowErrorMessage;
 
 export const getFollowing = (state: RootState) => state.users.following;
+
+export const getFriendFilter = (state: RootState) => state.users.friendFilter;
+export const getTermFilter = (state: RootState) => state.users.termFilter;
