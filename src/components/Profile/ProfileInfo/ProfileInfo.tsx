@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import s from './../Profile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { getProfileUserData, getStatus } from '../../../redux/profile-reducer';
 import { useParams } from 'react-router-dom';
 import { getId, getIsAuth } from '../../../redux/selectors/auth-selector';
@@ -21,9 +21,10 @@ import { Toast } from '../../Toast/Toast';
 import { ProfileStatus } from './ProfileStatus/ProfileStatus';
 import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
 import { ProfileDescription } from './ProfileDescription/ProfileDescription';
+import { ThemeContext } from '../../../context/context';
 
 export const ProfileInfo = () => {
-  let profileHeader = cn(s.profile__header, s['header-profile']);
+  const theme = useContext(ThemeContext);
 
   const dispatch = useAppDispatch();
   const id = useAppSelector(getId);
@@ -59,6 +60,11 @@ export const ProfileInfo = () => {
       dispatch(getStatus(userId));
     }
   }, [userId, dispatch]);
+
+  let profileHeader = cn(s.profile__header, s['header-profile'], {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
+  });
 
   return (
     <>

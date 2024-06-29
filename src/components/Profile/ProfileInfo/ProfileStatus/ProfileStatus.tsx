@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import cn from 'classnames';
 import s from './../../Profile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
-import { getIsAuth } from '../../../../redux/selectors/auth-selector';
-import {
-  getProfileStatus,
-  getUserStatus,
-} from '../../../../redux/selectors/profile-selector';
+import { getUserStatus } from '../../../../redux/selectors/profile-selector';
 import { updateStatus } from '../../../../redux/profile-reducer';
+import { ThemeContext } from '../../../../context/context';
 
 interface ProfileStatusPropsType {
   id: number | null;
@@ -15,10 +12,10 @@ interface ProfileStatusPropsType {
 }
 
 export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
+  const theme = useContext(ThemeContext);
+
   const dispatch = useAppDispatch();
-  const profileStatus = useAppSelector(getProfileStatus);
   const status = useAppSelector(getUserStatus);
-  const isAuth = useAppSelector(getIsAuth);
   const [statusText, setStatusText] = useState<string>('');
   const [changeStatus, setChangeStatus] = useState<boolean>(false);
 
@@ -48,7 +45,14 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
     [s['profile-status__placeholder']]: !status,
   });
 
-  let profileStatusClass = cn(s['header-profile__status'], s['profile-status']);
+  let profileStatusClass = cn(
+    s['header-profile__status'],
+    s['profile-status'],
+    {
+      [s.light]: theme === 'light',
+      [s.dark]: theme === 'dark',
+    },
+  );
 
   let statusTextClass = cn(s['profile-status__text'], {
     [s['profile-status__text_user']]: userProfile,

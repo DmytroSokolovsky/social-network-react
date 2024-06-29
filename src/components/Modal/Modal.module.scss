@@ -1,4 +1,4 @@
-.modal {
+.modal.dark {
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
@@ -10,7 +10,218 @@
   align-items: center;
   padding: 15px;
   z-index: 15;
-  &__container {
+  .modal__container {
+    padding: 20px;
+    background-color: #23272f;
+    width: 500px;
+    max-height: 100%;
+    overflow: auto;
+  }
+  // .modal__body
+  .modal__body {
+  }
+  // .modal__header
+  .modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 0px 20px 0px;
+  }
+  // .modal__title
+  .modal__title {
+    font-family: "PT-Sans-regular-bold", serif;
+    color: #fff;
+    font-size: 24px;
+  }
+  // .modal__close
+  .modal__close {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 15px;
+      height: 33px;
+      width: 2px;
+      background-color: #fff;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+  // .modal__form
+  .modal__form {
+  }
+  // .modal__email
+  .modal__email {
+    display: block;
+    color: #fff;
+    font-family: "PT-Sans-regular", serif;
+    font-size: 18px;
+    margin: 0px 0px 10px 0px;
+    span {
+      display: block;
+      margin: 0px 0px 5px 0px;
+    }
+    input {
+      font-size: 18px;
+      font-family: "PT-Sans-regular", serif;
+      width: 100%;
+      padding: 5px 0px;
+      color: #fff;
+      border-bottom: 1px solid #333a45;
+      background-color: #23272f;
+      &::placeholder {
+        font-family: "PT-Sans-italic", serif;
+        font-size: 18px;
+      }
+    }
+  }
+  // .modal__password
+  .modal__password {
+    display: block;
+    color: #fff;
+    font-family: "PT-Sans-regular", serif;
+    font-size: 18px;
+    margin: 0px 0px 10px 0px;
+    span {
+      display: block;
+      margin: 0px 0px 5px 0px;
+    }
+    input {
+      font-size: 18px;
+      font-family: "PT-Sans-regular", serif;
+      width: 100%;
+      padding: 5px 5px 5px 0px;
+      color: #fff;
+      background-color: #23272f;
+      &::placeholder {
+        font-family: "PT-Sans-italic", serif;
+        font-size: 18px;
+      }
+    }
+  }
+  .modal__row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333a45;
+    &:last-child {
+      cursor: pointer;
+    }
+  }
+  .modal__rememberMe {
+    display: block;
+    color: #fff;
+    font-family: "PT-Sans-regular", serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0px 0px 10px 0px;
+    input {
+      margin: 0px 5px 0px 0px;
+      width: 18px;
+      height: 18px;
+    }
+    span {
+    }
+  }
+  // .modal__singIn
+  .modal__signIn {
+    position: relative;
+    background-color: #fff;
+    font-family: "PT-Sans-regular-bold", serif;
+    font-size: 18px;
+    border: 2px solid #fff;
+    &.invalid {
+      cursor: auto;
+      &:hover {
+        &:after {
+          scale: 0;
+        }
+        span {
+          position: relative;
+          z-index: 2;
+          color: #23272f;
+        }
+      }
+    }
+    span {
+      display: block;
+      padding: 5px 10px;
+      color: #23272f;
+      transition: all 0.3s ease 0s;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      scale: 0;
+      background-color: #23272f;
+      transition: all 0.3s ease 0s;
+    }
+    &:hover {
+      &:after {
+        scale: 1;
+      }
+      span {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+      }
+    }
+  }
+  .modal__captcha {
+    display: block;
+    margin: 0px 0px 10px 0px;
+    img {
+      display: block;
+      margin: 0px 0px 5px 0px;
+    }
+    input {
+      width: 100%;
+      padding: 5px 0;
+      border-bottom: 1px solid #333a45;
+      font-size: 18px;
+      font-family: "PT-Sans-regular", serif;
+      background-color: #23272f;
+      color: #fff;
+      &::placeholder {
+        font-size: 18px;
+        font-family: "PT-Sans-italic", serif;
+      }
+    }
+  }
+  .modal__eye {
+  }
+}
+
+.modal.light {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  z-index: 15;
+  .modal__container {
     padding: 20px;
     background-color: #fff;
     width: 500px;
@@ -18,23 +229,23 @@
     overflow: auto;
   }
   // .modal__body
-  &__body {
+  .modal__body {
   }
   // .modal__header
-  &__header {
+  .modal__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0px 0px 20px 0px;
   }
   // .modal__title
-  &__title {
+  .modal__title {
     font-family: "PT-Sans-regular-bold", serif;
     color: #23272f;
     font-size: 24px;
   }
   // .modal__close
-  &__close {
+  .modal__close {
     position: relative;
     width: 32px;
     height: 32px;
@@ -60,10 +271,10 @@
     }
   }
   // .modal__form
-  &__form {
+  .modal__form {
   }
   // .modal__email
-  &__email {
+  .modal__email {
     display: block;
     color: #23272f;
     font-family: "PT-Sans-regular", serif;
@@ -87,7 +298,7 @@
     }
   }
   // .modal__password
-  &__password {
+  .modal__password {
     display: block;
     color: #23272f;
     font-family: "PT-Sans-regular", serif;
@@ -109,7 +320,7 @@
       }
     }
   }
-  &__row {
+  .modal__row {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #333a45;
@@ -117,7 +328,7 @@
       cursor: pointer;
     }
   }
-  &__rememberMe {
+  .modal__rememberMe {
     display: block;
     color: #23272f;
     font-family: "PT-Sans-regular", serif;
@@ -135,7 +346,7 @@
     }
   }
   // .modal__singIn
-  &__signIn {
+  .modal__signIn {
     position: relative;
     background-color: #23272f;
     font-family: "PT-Sans-regular-bold", serif;
@@ -182,7 +393,7 @@
       }
     }
   }
-  &__captcha {
+  .modal__captcha {
     display: block;
     margin: 0px 0px 10px 0px;
     img {
@@ -200,6 +411,8 @@
         font-family: "PT-Sans-italic", serif;
       }
     }
+  }
+  .modal__eye {
   }
 }
 

@@ -2,8 +2,9 @@ import { useAppSelector } from '../../../../hooks/hooks';
 import { getDescription } from '../../../../redux/selectors/profile-selector';
 import cn from 'classnames';
 import s from './../../Profile.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { EditDescription } from './EditDescription/EditDescription';
+import { ThemeContext } from '../../../../context/context';
 
 interface ProfileInfoPropsType {
   userProfile: boolean;
@@ -14,25 +15,11 @@ export const ProfileDescription = ({
   userProfile,
   userId,
 }: ProfileInfoPropsType) => {
+  const theme = useContext(ThemeContext);
+
   const [editDescription, setEditDescription] = useState(false);
 
   const profileDescription = useAppSelector(getDescription);
-
-  let descriptionClass = cn(
-    s['header-profile__description'],
-    s['profile-description'],
-  );
-
-  let contactsClass = cn(s['header-profile__contacts'], s['profile-contacts']);
-
-  let infoClass = cn(s['profile-description__info'], {
-    [s['profile-description__info_user']]: userProfile,
-    [s['profile-description__info_active']]: !editDescription,
-  });
-
-  let updateClass = cn(s['profile-description__update'], {
-    [s['profile-description__update_active']]: editDescription,
-  });
 
   const hasContacts =
     profileDescription?.contacts?.facebook ||
@@ -51,6 +38,31 @@ export const ProfileDescription = ({
   const handleUpdateDescription = () => {
     setEditDescription(true);
   };
+
+  let descriptionClass = cn(
+    s['header-profile__description'],
+    s['profile-description'],
+    {
+      [s.light]: theme === 'light',
+      [s.dark]: theme === 'dark',
+    },
+  );
+
+  let contactsClass = cn(s['header-profile__contacts'], s['profile-contacts'], {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
+  });
+
+  let infoClass = cn(s['profile-description__info'], {
+    [s['profile-description__info_user']]: userProfile,
+    [s['profile-description__info_active']]: !editDescription,
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
+  });
+
+  let updateClass = cn(s['profile-description__update'], {
+    [s['profile-description__update_active']]: editDescription,
+  });
 
   return (
     <div className={descriptionClass}>

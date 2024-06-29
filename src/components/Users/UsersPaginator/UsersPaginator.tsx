@@ -1,12 +1,13 @@
 import cn from 'classnames';
 import s from '../Users.module.scss';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleChevronLeft,
   faCircleChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { useMatchMedia } from '../../../hooks/useMatchMedia';
+import { ThemeContext } from '../../../context/context';
 
 interface UsersPaginatorPropsType {
   pages: Array<number>;
@@ -19,10 +20,12 @@ export const UsersPaginator = ({
   handleSetPage,
   currentPage,
 }: UsersPaginatorPropsType) => {
-  const { md4 } = useMatchMedia();
+  const theme = useContext(ThemeContext);
+
+  const { md3 } = useMatchMedia();
 
   let pagesInRange: number = 10;
-  if (md4) {
+  if (md3) {
     pagesInRange = 5;
   }
 
@@ -45,7 +48,7 @@ export const UsersPaginator = ({
     };
 
     generatePageRange(index);
-  }, [index, pagesCount]);
+  }, [index, pagesCount, pagesInRange]);
 
   const handlePrev = () => {
     if (index > 1) {
@@ -67,8 +70,13 @@ export const UsersPaginator = ({
     [s.disabled]: index + pagesInRange > pagesCount,
   });
 
+  let paginatorClass = cn(s.paginator, {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
+  });
+
   return (
-    <div className={s.paginator}>
+    <div className={paginatorClass}>
       <div className={s.paginator__prev}>
         <FontAwesomeIcon
           className={prevButtonClass}

@@ -207,6 +207,7 @@ const authSlice = createSlice({
     });
     builder.addCase(logout.fulfilled, (state, { payload }) => {
       state.logoutStatus = 'resolved';
+      state.loginStatus = 'rejected';
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.logoutStatus = 'rejected';

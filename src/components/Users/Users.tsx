@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getUsers, setPage } from '../../redux/users-reducer';
 import {
@@ -18,8 +18,24 @@ import s from './Users.module.scss';
 import { Toast } from '../Toast/Toast';
 import { UsersPaginator } from './UsersPaginator/UsersPaginator';
 import { User } from './User/User';
+import { ThemeContext } from '../../context/context';
+import cn from 'classnames';
+import { useForm } from 'react-hook-form';
+
+interface FilterFormData {
+  term: string;
+  friend: 'all' | 'true' | 'false';
+}
 
 const Users = () => {
+  const { register, handleSubmit, reset } = useForm<FilterFormData>({
+    defaultValues: {
+      friend: 'all',
+    },
+  });
+
+  const theme = useContext(ThemeContext);
+
   const dispatch = useAppDispatch();
   const users = useAppSelector(getUsersSelector);
   const totalCount = useAppSelector(getTotalCount);
@@ -56,9 +72,28 @@ const Users = () => {
 
   const following = useAppSelector(getFollowing);
 
+  let usersClass = cn(s.users, {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
+  });
+
+  const onSubmit = handleSubmit(data => {
+    JSON.stringify(data);
+    console.log(data);
+  });
+
   return (
     <>
-      <div className={s.users}>
+      <div className={usersClass}>
+        <form onSubmit={onSubmit}>
+          <input type="text" {...register('term')} />
+          <select {...register('friend')}>
+            <option value="all">All</option>
+            <option value="true">Followed</option>
+            <option value="false">Unfollowed</option>
+          </select>
+          <button type="submit">Search</button>
+        </form>
         <UsersPaginator
           pages={pages}
           handleSetPage={handleSetPage}

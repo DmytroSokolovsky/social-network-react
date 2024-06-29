@@ -5,11 +5,12 @@ $md3: 767.98px;
 $md4: 479.98px;
 $fontfamily: "PT-Sans-regular";
 
-.sidebar {
+.sidebar.dark {
   background-color: #23272f;
   position: fixed;
   top: 80px;
   width: 120px;
+  transition: all 0.3s ease 0s;
   @media (max-width: $md3) {
     position: fixed;
     width: 100%;
@@ -17,7 +18,7 @@ $fontfamily: "PT-Sans-regular";
     z-index: 4;
     overflow: auto;
     left: 0;
-    background-color: rgba(#23272f, 0.98);
+    background-color: #23272f;
     transition: transform 0.3s ease;
     transform: translateY(-100%);
 
@@ -27,23 +28,24 @@ $fontfamily: "PT-Sans-regular";
   }
 
   // .sidebar__body
-  &__body {
+  .sidebar__body {
   }
   // .sidebar__list
-  &__list {
+  .sidebar__list {
     @media (max-width: $md3) {
       text-align: center;
     }
     li {
       padding: 10px 15px;
       border-bottom: 2px solid #333a45;
+      transition: all 0.3s ease 0s;
       @media (max-width: $md3) {
         padding: 20px 25px;
       }
     }
   }
   // .sidebar__link
-  &__link {
+  .sidebar__link {
     color: #fff;
     font-size: 18px;
     font-family: "PT-Sans-regular-bold", serif;
@@ -56,6 +58,67 @@ $fontfamily: "PT-Sans-regular";
     }
     &_active {
       color: #00d8ff;
+    }
+  }
+}
+
+.sidebar.light {
+  background-color: #fff;
+  position: fixed;
+  top: 80px;
+  width: 120px;
+  transition: all 0.3s ease 0s;
+  border-left: 2px solid #23272f;
+
+  @media (max-width: $mwContainer) {
+    border-left: none;
+  }
+  @media (max-width: $md3) {
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 80px);
+    z-index: 4;
+    overflow: auto;
+    left: 0;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
+    &.active {
+      transform: translateY(0);
+    }
+  }
+
+  // .sidebar__body
+  .sidebar__body {
+  }
+  // .sidebar__list
+  .sidebar__list {
+    @media (max-width: $md3) {
+      text-align: center;
+    }
+    li {
+      padding: 10px 15px;
+      border-bottom: 2px solid #23272f;
+      transition: all 0.3s ease 0s;
+      @media (max-width: $md3) {
+        padding: 20px 25px;
+      }
+    }
+  }
+  // .sidebar__link
+  .sidebar__link {
+    color: #23272f;
+    font-size: 18px;
+    font-family: "PT-Sans-regular-bold", serif;
+    transition: all 0.3s ease 0s;
+    @media (max-width: $md3) {
+      font-size: 28px;
+    }
+    &:hover {
+      color: #087ea4;
+    }
+    &_active {
+      color: #087ea4;
     }
   }
 }

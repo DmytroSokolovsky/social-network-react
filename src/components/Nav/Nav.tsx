@@ -1,6 +1,8 @@
 import s from './Nav.module.scss';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/context';
 
 interface NavPropsType {
   menuOpen: boolean;
@@ -8,9 +10,13 @@ interface NavPropsType {
 }
 
 const Nav = ({ menuOpen, setMenuOpen }: NavPropsType) => {
+  const theme = useContext(ThemeContext);
+
   let linksClass = cn(s.sidebar__link, s.sidebar__link_active);
   let sidebarClass = cn(s.sidebar, {
     [s.active]: menuOpen,
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
   });
 
   const handleCloseMenu = () => {

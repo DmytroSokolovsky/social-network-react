@@ -2,13 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { UserType } from '../../../api/users-api';
 import profileAvatar from '../../../images/profile__avatar.png';
 import s from './../Users.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { useAppDispatch } from '../../../hooks/hooks';
 import { follow, unFollow } from '../../../redux/users-reducer';
-import {
-  getFollowStatus,
-  getFollowing,
-  getUnFollowStatus,
-} from '../../../redux/selectors/users-selector';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/context';
 import cn from 'classnames';
 
 interface UserProps {
@@ -17,11 +14,10 @@ interface UserProps {
 }
 
 export const User = ({ user, followingId }: UserProps) => {
+  const theme = useContext(ThemeContext);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const followStatus = useAppSelector(getFollowStatus);
-  const unFollowStatus = useAppSelector(getUnFollowStatus);
-  const following = useAppSelector(getFollowing);
 
   const handleClick = (userId: number) => {
     navigate(`/profile/${userId}`, { replace: true });
@@ -35,16 +31,13 @@ export const User = ({ user, followingId }: UserProps) => {
     dispatch(unFollow(userId));
   };
 
-  let followClass = cn(s.user__follow, {
-    [s.loading]: unFollowStatus === 'loading',
-  });
-
-  let unFollowClass = cn(s.user__unFollow, {
-    [s.loading]: followStatus === 'loading',
+  let userClass = cn(s.user, {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
   });
 
   return (
-    <div className={s.user}>
+    <div className={userClass}>
       <div className={s.user__image} onClick={() => handleClick(user.id)}>
         {user?.photos?.small ? (
           <img src={user?.photos?.small} alt="" />

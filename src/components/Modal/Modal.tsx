@@ -3,7 +3,7 @@ import s from './Modal.module.scss';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { login } from '../../redux/auth-reducer';
@@ -16,6 +16,7 @@ import {
   getIsAuth,
 } from '../../redux/selectors/auth-selector';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../../context/context';
 
 interface LoginFormData {
   email: string;
@@ -38,6 +39,8 @@ const Modal = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const theme = useContext(ThemeContext);
+
   const {
     register,
     handleSubmit,
@@ -54,7 +57,7 @@ const Modal = () => {
       navigate(from, { replace: true });
       reset();
     }
-  }, [isAuth, navigate, from, reset]);
+  }, [isAuth, navigate, from, reset, loginStatus]);
 
   const handleEye = () => {
     setPasswordOpen(prevpasswordOpen => !prevpasswordOpen);
@@ -73,8 +76,13 @@ const Modal = () => {
     [s.invalid]: !isValid,
   });
 
+  let modalClass = cn(s.modal, {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
+  });
+
   return createPortal(
-    <div className={s.modal}>
+    <div className={modalClass}>
       <div className={s.modal__container}>
         <div className={s.modal__body}>
           <div className={s.modal__header}>
@@ -126,10 +134,18 @@ const Modal = () => {
                   />
                 )}
                 {!passwordOpen && (
-                  <FontAwesomeIcon icon={faEye} onClick={handleEye} />
+                  <FontAwesomeIcon
+                    icon={faEye}
+                    onClick={handleEye}
+                    className={s.modal__eye}
+                  />
                 )}
                 {passwordOpen && (
-                  <FontAwesomeIcon icon={faEyeSlash} onClick={handleEye} />
+                  <FontAwesomeIcon
+                    icon={faEyeSlash}
+                    onClick={handleEye}
+                    className={s.modal__eye}
+                  />
                 )}
               </div>
               {errors?.password && (

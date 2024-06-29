@@ -1,16 +1,20 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import { updatePhoto } from '../../../../redux/profile-reducer';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import { getDescription } from '../../../../redux/selectors/profile-selector';
 import s from './../../Profile.module.scss';
 import profileAvatar from '../../../../images/profile__avatar.png';
 import { getIsAuth } from '../../../../redux/selectors/auth-selector';
+import { ThemeContext } from '../../../../context/context';
+import cn from 'classnames';
 
 interface ProfileAvatarPropsType {
   userProfile: boolean;
 }
 
 export const ProfileAvatar = ({ userProfile }: ProfileAvatarPropsType) => {
+  const theme = useContext(ThemeContext);
+
   const dispatch = useAppDispatch();
   const profileDescription = useAppSelector(getDescription);
   const isAuth = useAppSelector(getIsAuth);
