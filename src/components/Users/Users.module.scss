@@ -431,6 +431,9 @@ $fontfamily: "PT-Sans-regular";
     display: block;
     font-size: 18px;
     margin: 0px 0px 5px 0px;
+    @media (max-width: 520px) {
+      text-align: center;
+    }
   }
   .selectWrapper {
     position: relative;
@@ -522,6 +525,9 @@ $fontfamily: "PT-Sans-regular";
     font-size: 18px;
     margin: 0px 0px 5px 0px;
     color: #23272f;
+    @media (max-width: 520px) {
+      text-align: center;
+    }
   }
   .selectWrapper {
     position: relative;
@@ -612,6 +618,9 @@ $fontfamily: "PT-Sans-regular";
     display: block;
     font-size: 18px;
     margin: 0px 0px 5px 0px;
+    @media (max-width: 520px) {
+      text-align: center;
+    }
   }
   .selectWrapper {
     position: relative;
@@ -705,6 +714,9 @@ $fontfamily: "PT-Sans-regular";
     font-size: 18px;
     margin: 0px 0px 5px 0px;
     color: #23272f;
+    @media (max-width: 520px) {
+      text-align: center;
+    }
   }
   .selectWrapper {
     position: relative;
@@ -796,14 +808,30 @@ $fontfamily: "PT-Sans-regular";
   justify-content: center;
   align-items: flex-end;
   margin: 0px -5px 20px -5px;
+  @media (max-width: 650px) {
+    flex-wrap: wrap;
+  }
+  @media (max-width: 520px) {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px -5px 10px -5px;
+  }
   .form-users__column {
     padding: 0 5px;
+    @media (max-width: 520px) {
+      margin: 0px 0px 10px 0px;
+    }
   }
   .form-users__input {
     span {
       display: block;
       font-size: 18px;
       margin: 0px 0px 5px 0px;
+      @media (max-width: 520px) {
+        text-align: center;
+      }
     }
     input {
       padding: 5px;
@@ -812,6 +840,9 @@ $fontfamily: "PT-Sans-regular";
       width: 200px;
       color: #fff;
       border: 2px solid #fff;
+      @media (max-width: 650px) {
+        width: 150px;
+      }
       &::placeholder {
         color: grey;
         font-family: "PT-Sans-italic", serif;
@@ -826,17 +857,17 @@ $fontfamily: "PT-Sans-regular";
     font-size: 18px;
     border: 2px solid #fff;
     text-wrap: nowrap;
-    @media (max-width: $md4) {
-      margin: 0px 0px 0px 5px;
+    @media (max-width: 600px) {
+      margin: 10px 0px 0px 0px;
+    }
+    @media (max-width: 520px) {
+      margin: 0px;
     }
     span {
       display: block;
       padding: 5px 10px;
       color: #23272f;
       transition: all 0.3s ease 0s;
-      @media (max-width: $md4) {
-        padding: 3px 5px;
-      }
     }
     &:after {
       content: "";
@@ -867,8 +898,21 @@ $fontfamily: "PT-Sans-regular";
   justify-content: center;
   align-items: flex-end;
   margin: 0px -5px 20px -5px;
+  @media (max-width: 650px) {
+    flex-wrap: wrap;
+  }
+  @media (max-width: 520px) {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px -5px 10px -5px;
+  }
   .form-users__column {
     padding: 0 5px;
+    @media (max-width: 520px) {
+      margin: 0px 0px 10px 0px;
+    }
   }
   .form-users__input {
     span {
@@ -876,6 +920,9 @@ $fontfamily: "PT-Sans-regular";
       font-size: 18px;
       margin: 0px 0px 5px 0px;
       color: #23272f;
+      @media (max-width: 520px) {
+        text-align: center;
+      }
     }
     input {
       padding: 5px;
@@ -884,6 +931,9 @@ $fontfamily: "PT-Sans-regular";
       width: 200px;
       color: #23272f;
       border: 2px solid #23272f;
+      @media (max-width: 650px) {
+        width: 150px;
+      }
       &::placeholder {
         color: grey;
         font-family: "PT-Sans-italic", serif;
@@ -898,17 +948,17 @@ $fontfamily: "PT-Sans-regular";
     font-size: 18px;
     border: 2px solid #23272f;
     text-wrap: nowrap;
-    @media (max-width: $md4) {
-      margin: 0px 0px 0px 5px;
+    @media (max-width: 600px) {
+      margin: 10px 0px 0px 0px;
+    }
+    @media (max-width: 520px) {
+      margin: 0px;
     }
     span {
       display: block;
       padding: 5px 10px;
       color: #fff;
       transition: all 0.3s ease 0s;
-      @media (max-width: $md4) {
-        padding: 3px 5px;
-      }
     }
     &:after {
       content: "";
