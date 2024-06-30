@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   getUsers,
@@ -30,17 +30,22 @@ import { ThemeContext } from '../../context/context';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
+import { UsersSelect } from './UsersSelect/UsersSelect';
+
+const options1 = [
+  { title: 'All', value: 'null' },
+  { title: 'Followed', value: 'true' },
+  { title: 'Unfollowed', value: 'false' },
+];
 
 interface FilterFormData {
   term: string;
-  friend: string;
   pageCount: string;
 }
 
 const Users = () => {
   const { register, handleSubmit, reset } = useForm<FilterFormData>({
     defaultValues: {
-      friend: 'null',
       pageCount: '20',
     },
   });
@@ -83,10 +88,18 @@ const Users = () => {
     }
   }
 
-  const countQuery = searchParams.get('count') || '';
-  const pageQuery = searchParams.get('page') || '';
+  const countQuery = searchParams.get('count') || '10';
+  const pageQuery = searchParams.get('page') || '1';
   const termQuery = searchParams.get('term') || '';
-  const friendQuery = searchParams.get('friend') || '';
+  const friendQuery = searchParams.get('friend') || 'null';
+
+  const [filter1, setFilter1] = useState(searchParams.get('friend') || 'null');
+  const handleFilter1Select = (value: string) => {
+    setFilter1(value);
+    setFriendFilter(value);
+  };
+
+  const selectedMonth = options1.find(item => item.value === filter1);
 
   useEffect(() => {
     dispatch(setFriendFilter(friendQuery));
@@ -103,7 +116,6 @@ const Users = () => {
 
     reset({
       term: termQuery,
-      friend: friendQuery,
       pageCount: countQuery,
     });
 
@@ -153,7 +165,7 @@ const Users = () => {
   });
 
   const onSubmit = handleSubmit(data => {
-    dispatch(setFriendFilter(data.friend));
+    dispatch(setFriendFilter(filter1));
     dispatch(setTermFilter(data.term));
     dispatch(setPage(1));
     dispatch(setCount(+data.pageCount));
@@ -164,7 +176,7 @@ const Users = () => {
       count: data.pageCount,
       page: '1',
       term: data.term,
-      friend: data.friend,
+      friend: filter1,
     });
 
     dispatch(
@@ -172,22 +184,35 @@ const Users = () => {
         count: data.pageCount,
         page: '1',
         term: data.term,
-        friend: data.friend,
+        friend: filter1,
       }),
     );
+  });
+
+  let selectFriendClass = cn(s.select__friend, {
+    [s.light]: theme === 'light',
+    [s.dark]: theme === 'dark',
   });
 
   return (
     <>
       <div className={usersClass}>
         <form onSubmit={onSubmit}>
-          Filter: <input type="text" {...register('term')} />
-          Choose:
-          <select {...register('friend')}>
-            <option value="null">All</option>
-            <option value="true">Followed</option>
-            <option value="false">Unfollowed</option>
-          </select>
+          Filter:{' '}
+          <input
+            type="text"
+            {...register('term')}
+            placeholder="Enter filter..."
+          />
+          <div className={selectFriendClass}>
+            Choose:
+            <UsersSelect
+              mode="rows"
+              options={options1}
+              selected={selectedMonth || options1[0]}
+              onChange={handleFilter1Select}
+            />
+          </div>
           Users count on page:
           <select {...register('pageCount')}>
             <option value="5">5</option>
