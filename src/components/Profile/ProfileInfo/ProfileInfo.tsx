@@ -52,7 +52,7 @@ export const ProfileInfo = () => {
     userId = id;
   }
 
-  let userProfile = userId === id;
+  let userProfile = +userId === id;
 
   useEffect(() => {
     if (userId !== null) {
