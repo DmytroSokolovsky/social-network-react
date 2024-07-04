@@ -136,17 +136,27 @@ const Users = () => {
     <>
       <div className={usersClass}>
         <UsersFilter />
-        <UsersPaginator
-          pages={pages}
-          handleSetPage={handleSetPage}
-          currentPage={+pageQuery}
-        />
-        <div className={s.users__bottom}>
-          {users?.map(user => {
-            const followingId = following.find(id => id === user.id);
-            return <User user={user} key={user.id} followingId={followingId} />;
-          })}
-        </div>
+        {users !== null && users.length > 0 ? (
+          <UsersPaginator
+            pages={pages}
+            handleSetPage={handleSetPage}
+            currentPage={+pageQuery}
+          />
+        ) : (
+          ''
+        )}
+        {users !== null && users.length > 0 ? (
+          <div className={s.users__bottom}>
+            {users?.map(user => {
+              const followingId = following.find(id => id === user.id);
+              return (
+                <User user={user} key={user.id} followingId={followingId} />
+              );
+            })}
+          </div>
+        ) : (
+          <div className={s.users__no}>No users found</div>
+        )}
       </div>
       {usersStatus === 'rejected' && <Toast errorMessage={usersErrorMessage} />}
       {followStatus === 'rejected' && (

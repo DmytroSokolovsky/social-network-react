@@ -51,17 +51,6 @@ const Nav = ({ menuOpen, setMenuOpen }: NavPropsType) => {
           </li>
           <li>
             <NavLink
-              to="dialogs"
-              className={({ isActive }) =>
-                isActive ? linksClass : s.sidebar__link
-              }
-              onClick={handleCloseMenu}
-            >
-              Messages
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="chat"
               className={({ isActive }) =>
                 isActive ? linksClass : s.sidebar__link

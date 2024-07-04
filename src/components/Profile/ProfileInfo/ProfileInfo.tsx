@@ -74,6 +74,11 @@ export const ProfileInfo = () => {
           {profileStatus === 'resolved' && isAuth && (
             <ProfileStatus id={id} userId={userId} />
           )}
+          {!isAuth && (
+            <div className={s['header-profile__warn']}>
+              To see profile you should sign in!
+            </div>
+          )}
         </div>
         {profileStatus === 'resolved' && isAuth && (
           <div className={s['header-profile__column']}>

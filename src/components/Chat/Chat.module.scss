@@ -24,6 +24,10 @@ $md4: 479.98px;
     flex-grow: 1;
     padding: 0px 20px 0px 0px;
   }
+  .chat__warn {
+    font-size: 18px;
+    font-family: "PT-Sans-regular-bold", serif;
+  }
   .chat__message {
     display: flex;
     align-items: flex-start;
@@ -189,6 +193,11 @@ $md4: 479.98px;
     overflow: auto;
     flex-grow: 1;
     padding: 0px 20px 0px 0px;
+  }
+  .chat__warn {
+    font-size: 18px;
+    font-family: "PT-Sans-regular-bold", serif;
+    color: #23272f;
   }
   .chat__message {
     display: flex;

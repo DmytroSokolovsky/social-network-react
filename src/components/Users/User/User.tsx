@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { UserType } from '../../../api/users-api';
 import profileAvatar from '../../../images/profile__avatar.png';
 import s from './../Users.module.scss';
-import { useAppDispatch } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { follow, unFollow } from '../../../redux/users-reducer';
 import { useContext } from 'react';
 import { ThemeContext } from '../../../context/context';
 import cn from 'classnames';
+import { getIsAuth } from '../../../redux/selectors/auth-selector';
 
 interface UserProps {
   user: UserType;
@@ -15,6 +16,8 @@ interface UserProps {
 
 export const User = ({ user, followingId }: UserProps) => {
   const theme = useContext(ThemeContext);
+
+  const isAuth = useAppSelector(getIsAuth);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -47,7 +50,7 @@ export const User = ({ user, followingId }: UserProps) => {
       </div>
       <div className={s.user__info}>
         <div className={s.user__name}>{user.name}</div>
-        {user.followed && (
+        {user.followed && isAuth && (
           <button
             className={
               !followingId
@@ -60,7 +63,7 @@ export const User = ({ user, followingId }: UserProps) => {
             <span>Unfollow</span>
           </button>
         )}
-        {!user.followed && (
+        {!user.followed && isAuth && (
           <button
             className={
               !followingId ? s.user__follow : `${s.user__follow} ${s.loading}`

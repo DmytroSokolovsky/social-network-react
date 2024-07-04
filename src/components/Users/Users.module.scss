@@ -7,10 +7,10 @@ $fontfamily: "PT-Sans-regular";
 
 .users.dark {
   margin-left: 120px;
-  padding: 90px 20px 15px 20px;
+  padding: 90px 20px 10px 20px;
   background-color: #23272f;
   width: 100%;
-  min-height: 260px;
+  min-height: 100vh;
   @media (max-width: $md3) {
     margin-left: 0;
   }
@@ -21,16 +21,22 @@ $fontfamily: "PT-Sans-regular";
   }
   .users__form {
   }
+  .users__no {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-family: "PT-Sans-regular-bold", serif;
+  }
 }
 
 .users.light {
   margin-left: 120px;
-  padding: 90px 20px 15px 20px;
+  padding: 90px 20px 10px 20px;
   background-color: #fff;
   border: 2px solid #23272f;
   border-top: none;
   width: 100%;
-  min-height: 260px;
+  min-height: 100vh;
   @media (max-width: $mwContainer) {
     border-right: none;
   }
@@ -46,6 +52,13 @@ $fontfamily: "PT-Sans-regular";
     margin: 0 -15px;
   }
   .users__form {
+  }
+  .users__no {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-family: "PT-Sans-regular-bold", serif;
+    color: #23272f;
   }
 }
 

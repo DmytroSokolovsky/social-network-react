@@ -13,7 +13,6 @@ const Nav = lazy(() => import('./components/Nav/Nav'));
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const Profile = lazy(() => import('./components/Profile/Profile'));
 const Users = lazy(() => import('./components/Users/Users'));
-const Dialogs = lazy(() => import('./components/Dialogs/Dialogs'));
 const Error = lazy(() => import('./components/Error/Error'));
 
 const App = () => {
@@ -61,7 +60,6 @@ const App = () => {
                     <Route path="/" element={<Navigate to={'/profile'} />} />
                     <Route path="/profile/:userId?" element={<Profile />} />
                     <Route path="/users" element={<Users />} />
-                    <Route path="/dialogs" element={<Dialogs />} />
                     <Route path="/chat" element={<Chat />} />
                     <Route path="/login" element={<Modal />} />
                     <Route path="*" element={<Error />} />
