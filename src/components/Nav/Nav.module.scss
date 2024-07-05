@@ -12,9 +12,10 @@ $fontfamily: "PT-Sans-regular";
   width: 120px;
   transition: all 0.3s ease 0s;
   @media (max-width: $md3) {
+    top: 70px;
     position: fixed;
     width: 100%;
-    height: calc(100% - 80px);
+    height: calc(100% - 70px);
     z-index: 4;
     overflow: auto;
     left: 0;
@@ -74,9 +75,10 @@ $fontfamily: "PT-Sans-regular";
     border-left: none;
   }
   @media (max-width: $md3) {
+    top: 70px;
     position: fixed;
     width: 100%;
-    height: calc(100% - 80px);
+    height: calc(100% - 70px);
     z-index: 4;
     overflow: auto;
     left: 0;

@@ -30,6 +30,7 @@ import { ThemeContext } from '../../context/context';
 import cn from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 import { UsersFilter } from './UsersFilter/UsersFilter';
+import preloader from './../../images/preloader.gif';
 
 const Users = () => {
   const theme = useContext(ThemeContext);
@@ -145,18 +146,23 @@ const Users = () => {
         ) : (
           ''
         )}
-        {users !== null && users.length > 0 ? (
-          <div className={s.users__bottom}>
-            {users?.map(user => {
-              const followingId = following.find(id => id === user.id);
-              return (
-                <User user={user} key={user.id} followingId={followingId} />
-              );
-            })}
-          </div>
-        ) : (
-          <div className={s.users__no}>No users found</div>
-        )}
+        <div className={s.users__bottom}>
+          {usersStatus === 'loading' && (
+            <div className={s.users__loading}>
+              <img src={preloader} alt="Loading..." />
+            </div>
+          )}
+          {users !== null && users.length > 0 && usersStatus === 'resolved'
+            ? users.map(user => {
+                const followingId = following.find(id => id === user.id);
+                return (
+                  <User user={user} key={user.id} followingId={followingId} />
+                );
+              })
+            : usersStatus !== 'loading' && (
+                <div className={s.users__no}>No users found</div>
+              )}
+        </div>
       </div>
       {usersStatus === 'rejected' && <Toast errorMessage={usersErrorMessage} />}
       {followStatus === 'rejected' && (

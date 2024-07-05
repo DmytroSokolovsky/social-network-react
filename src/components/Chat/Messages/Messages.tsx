@@ -37,13 +37,14 @@ export const Messages = () => {
           To have access to chat you chould sign in!
         </div>
       )}
-      {messages.map((message, index) => (
-        <Message
-          key={index}
-          {...message}
-          ref={index === messages.length - 1 ? messageAnchorRef : null}
-        />
-      ))}
+      {isAuth &&
+        messages.map((message, index) => (
+          <Message
+            key={index}
+            {...message}
+            ref={index === messages.length - 1 ? messageAnchorRef : null}
+          />
+        ))}
     </div>
   );
 };

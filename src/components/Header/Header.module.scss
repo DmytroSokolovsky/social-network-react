@@ -18,7 +18,7 @@ $fontfamily: "PT-Sans-regular";
   transition: all 0.3s ease 0s;
   border-bottom: 2px solid #333a45;
   @media (max-width: $md4) {
-    padding: 0 10px;
+    height: 70px;
   }
   // .header__body
   .header__body {
@@ -37,7 +37,7 @@ $fontfamily: "PT-Sans-regular";
     }
     &:nth-child(2) {
       @media (max-width: $md3) {
-        flex: 0 0 60px;
+        flex: 0 0 50px;
       }
     }
     &:last-child {
@@ -100,6 +100,10 @@ $fontfamily: "PT-Sans-regular";
   }
   // .header__logo
   .header__logo {
+    width: 60px;
+    @media (max-width: $md4) {
+      width: 50px;
+    }
   }
   .header__theme {
     cursor: pointer;
@@ -127,16 +131,16 @@ $fontfamily: "PT-Sans-regular";
     border: 2px solid #fff;
     margin: 0px 0px 0px 10px;
     text-wrap: nowrap;
-    @media (max-width: $md4) {
-      margin: 0px 0px 0px 5px;
-    }
+    // @media (max-width: $md4) {
+    //   margin: 0px 0px 0px 5px;
+    // }
     span {
       display: block;
       padding: 5px 10px;
       color: #23272f;
       transition: all 0.3s ease 0s;
       @media (max-width: $md4) {
-        padding: 3px 5px;
+        padding: 5px;
       }
     }
     &:after {
@@ -181,8 +185,11 @@ $fontfamily: "PT-Sans-regular";
     border-bottom: 2px solid #23272f;
   }
   @media (max-width: $md4) {
-    padding: 0 10px;
+    height: 70px;
   }
+  // @media (max-width: $md4) {
+  //   padding: 0 10px;
+  // }
   // .header__body
   .header__body {
     width: 100%;
@@ -200,7 +207,7 @@ $fontfamily: "PT-Sans-regular";
     }
     &:nth-child(2) {
       @media (max-width: $md3) {
-        flex: 0 0 60px;
+        flex: 0 0 50px;
       }
     }
     &:last-child {
@@ -263,6 +270,10 @@ $fontfamily: "PT-Sans-regular";
   }
   // .header__logo
   .header__logo {
+    width: 60px;
+    @media (max-width: $md4) {
+      width: 50px;
+    }
   }
   .header__theme {
     width: 30px;
@@ -301,16 +312,16 @@ $fontfamily: "PT-Sans-regular";
     border: 2px solid #23272f;
     margin: 0px 0px 0px 10px;
     text-wrap: nowrap;
-    @media (max-width: $md4) {
-      margin: 0px 0px 0px 5px;
-    }
+    // @media (max-width: $md4) {
+    //   margin: 0px 0px 0px 5px;
+    // }
     span {
       display: block;
       padding: 5px 10px;
       color: #fff;
       transition: all 0.3s ease 0s;
       @media (max-width: $md4) {
-        padding: 3px 5px;
+        padding: 5px;
       }
     }
     &:after {

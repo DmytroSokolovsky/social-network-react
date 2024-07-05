@@ -15,7 +15,7 @@ export const Preloader = () => {
 
   return createPortal(
     <div className={preloaderClass}>
-      <img src={preloader} alt="Зображення завантаження" />
+      <img src={preloader} alt="Loading..." />
     </div>,
     document.body,
   );

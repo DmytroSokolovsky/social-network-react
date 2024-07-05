@@ -12,7 +12,7 @@ $md4: 479.98px;
   transition: all 0.3s ease 0s;
   min-height: 100vh;
   @media (max-width: $md4) {
-    padding: 90px 10px 15px 10px;
+    padding: 80px 10px 15px 10px;
   }
   @media (max-width: $md3) {
     margin-left: 0;
@@ -34,6 +34,7 @@ $md4: 479.98px;
   transition: all 0.3s ease 0s;
   border: 2px solid #23272f;
   border-top: none;
+  border-bottom: none;
   min-height: 100vh;
   @media (max-width: $mwContainer) {
     border-right: none;
@@ -42,7 +43,7 @@ $md4: 479.98px;
     border-left: none;
   }
   @media (max-width: $md4) {
-    padding: 90px 10px 15px 10px;
+    padding: 80px 10px 15px 10px;
   }
   @media (max-width: $md3) {
     margin-left: 0;
@@ -1097,6 +1098,9 @@ $md4: 479.98px;
   // .posts-profile__bottom
   .posts-profile__bottom {
     margin: 0px 0px 10px 0px;
+    &:last-child {
+      margin: 0px 0px 0px 0px;
+    }
   }
 }
 
@@ -1139,6 +1143,9 @@ $md4: 479.98px;
   // .posts-profile__bottom
   .posts-profile__bottom {
     margin: 0px 0px 10px 0px;
+    &:last-child {
+      margin: 0px 0px 0px 0px;
+    }
   }
 }
 
