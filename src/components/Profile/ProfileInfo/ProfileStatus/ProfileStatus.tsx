@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import { getUserStatus } from '../../../../redux/selectors/profile-selector';
 import { updateStatus } from '../../../../redux/profile-reducer';
 import { ThemeContext } from '../../../../context/context';
+import { MyButton } from '../../../common/MyButton/MyButton';
 
 interface ProfileStatusPropsType {
   id: number | null;
@@ -95,12 +96,12 @@ export const ProfileStatus = ({ id, userId }: ProfileStatusPropsType) => {
               ></textarea>
             </div>
             <div className={s['profile-status__buttons']}>
-              <button
-                className={s['profile-status__save']}
+              <MyButton
+                style={{ marginRight: '10px' }}
                 onClick={handleSetStatus}
               >
-                <span>Save</span>
-              </button>
+                Save
+              </MyButton>
               <button
                 className={s['profile-status__cancel']}
                 onClick={handleClose}

@@ -7,7 +7,7 @@ import {
   stopMessagesListening,
 } from '../../redux/chat-reducer';
 import { getChatStatus } from '../../redux/selectors/chat-selector';
-import { Toast } from '../Toast/Toast';
+import { Toast } from '../common/Toast/Toast';
 import { Messages } from './Messages/Messages';
 import { AddMessage } from './AddMessage/AddMessage';
 import cn from 'classnames';

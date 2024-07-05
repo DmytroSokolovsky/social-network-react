@@ -6,6 +6,7 @@ import {
 } from '../../../../../redux/selectors/profile-selector';
 import s from './../../../Profile.module.scss';
 import { updateProfile } from '../../../../../redux/profile-reducer';
+import { MyButton } from '../../../../common/MyButton/MyButton';
 
 interface ContactsType {
   facebook: string;
@@ -155,9 +156,9 @@ export const EditDescription = ({
         </div>
       </div>
       <div className={s['profile-description__row']}>
-        <button type="submit" className={s['profile-description__submit']}>
-          <span>Save</span>
-        </button>
+        <MyButton style={{ marginRight: '10px' }} type="submit">
+          Save
+        </MyButton>
         <button
           onClick={handleReset}
           type="button"

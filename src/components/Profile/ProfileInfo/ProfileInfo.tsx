@@ -17,7 +17,7 @@ import {
   getUpdateProfileErrorMessage,
   getUpdateProfileStatus,
 } from '../../../redux/selectors/profile-selector';
-import { Toast } from '../../Toast/Toast';
+import { Toast } from '../../common/Toast/Toast';
 import { ProfileStatus } from './ProfileStatus/ProfileStatus';
 import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
 import { ProfileDescription } from './ProfileDescription/ProfileDescription';

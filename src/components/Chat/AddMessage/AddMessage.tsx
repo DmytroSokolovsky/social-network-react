@@ -4,6 +4,7 @@ import { getChatStatus } from '../../../redux/selectors/chat-selector';
 import { sendMessage } from '../../../redux/chat-reducer';
 import cn from 'classnames';
 import s from '../Chat.module.scss';
+import { MyButton } from '../../common/MyButton/MyButton';
 
 export const AddMessage = () => {
   const dispatch = useAppDispatch();
@@ -37,15 +38,14 @@ export const AddMessage = () => {
           value={message}
         ></textarea>
       </div>
-      <div className={sendClass}>
-        <button
-          onClick={handleSendMessage}
-          type="submit"
-          disabled={chatStatus !== 'ready'}
-        >
-          <span>Send</span>
-        </button>
-      </div>
+      <MyButton
+        disabled={chatStatus !== 'ready'}
+        type="submit"
+        onClick={handleSendMessage}
+        className={sendClass}
+      >
+        Send
+      </MyButton>
     </div>
   );
 };

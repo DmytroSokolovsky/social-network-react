@@ -234,7 +234,7 @@ $md4: 479.98px;
   }
   .profile-status__text {
     span {
-      font-size: 24px;
+      font-size: 18px;
       font-family: "PT-Sans-regular-bold", serif;
     }
   }
@@ -251,7 +251,7 @@ $md4: 479.98px;
     .profile-status__text {
       span {
         color: #fff;
-        font-size: 24px;
+        font-size: 18px;
         font-family: "PT-Sans-regular-bold", serif;
       }
       &_user {
@@ -275,7 +275,7 @@ $md4: 479.98px;
     .profile-status__update {
       display: block;
       font-family: "PT-Sans-regular-bold", serif;
-      font-size: 24px;
+      font-size: 18px;
       padding: 5px 10px;
       border: 2px solid #fff;
       border-left: none;
@@ -369,7 +369,7 @@ $md4: 479.98px;
     display: block;
     position: relative;
     cursor: pointer;
-    background-color: #23272f;
+    background-color: #333a45;
     font-family: "PT-Sans-regular-bold", serif;
     font-size: 18px;
     border: 2px solid #fff;
@@ -423,7 +423,7 @@ $md4: 479.98px;
   }
   .profile-status__text {
     span {
-      font-size: 24px;
+      font-size: 18px;
       font-family: "PT-Sans-regular-bold", serif;
       color: #23272f;
     }
@@ -441,7 +441,7 @@ $md4: 479.98px;
     .profile-status__text {
       span {
         color: #fff;
-        font-size: 24px;
+        font-size: 18px;
         font-family: "PT-Sans-regular-bold", serif;
       }
       &_user {
@@ -465,7 +465,7 @@ $md4: 479.98px;
     .profile-status__update {
       display: block;
       font-family: "PT-Sans-regular-bold", serif;
-      font-size: 24px;
+      font-size: 18px;
       padding: 5px 10px;
       border: 2px solid #23272f;
       border-left: none;
@@ -623,7 +623,7 @@ $md4: 479.98px;
   .profile-description__info {
     span {
       color: #fff;
-      font-size: 24px;
+      font-size: 18px;
       font-family: "PT-Sans-regular-bold", serif;
     }
     &_user {
@@ -646,7 +646,7 @@ $md4: 479.98px;
   // .profile-description__update
   .profile-description__update {
     font-family: "PT-Sans-regular-bold", serif;
-    font-size: 24px;
+    font-size: 18px;
     padding: 5px 10px;
     border: 2px solid #fff;
     border-left: none;
@@ -700,7 +700,7 @@ $md4: 479.98px;
   .profile-description__info {
     span {
       color: #fff;
-      font-size: 24px;
+      font-size: 18px;
       font-family: "PT-Sans-regular-bold", serif;
     }
     &_user {
@@ -723,7 +723,7 @@ $md4: 479.98px;
   // .profile-description__update
   .profile-description__update {
     font-family: "PT-Sans-regular-bold", serif;
-    font-size: 24px;
+    font-size: 18px;
     padding: 5px 10px;
     border: 2px solid #23272f;
     border-left: none;
@@ -899,7 +899,7 @@ $md4: 479.98px;
     display: block;
     position: relative;
     cursor: pointer;
-    background-color: #23272f;
+    background-color: #333a45;
     font-family: "PT-Sans-regular-bold", serif;
     font-size: 18px;
     border: 2px solid #fff;
@@ -1085,16 +1085,6 @@ $md4: 479.98px;
       }
     }
   }
-  // .posts-profile__send
-  .posts-profile__send {
-    button {
-      background-color: #fff;
-      color: #23272f;
-      font-size: 18px;
-      font-family: "PT-Sans-regular-bold", serif;
-      padding: 5px 10px;
-    }
-  }
   // .posts-profile__bottom
   .posts-profile__bottom {
     margin: 0px 0px 10px 0px;
@@ -1128,16 +1118,6 @@ $md4: 479.98px;
       @media (max-width: $md3) {
         width: 100%;
       }
-    }
-  }
-  // .posts-profile__send
-  .posts-profile__send {
-    button {
-      background-color: #23272f;
-      color: #fff;
-      font-size: 18px;
-      font-family: "PT-Sans-regular-bold", serif;
-      padding: 5px 10px;
     }
   }
   // .posts-profile__bottom

@@ -1,3 +1,4 @@
+import { MyButton } from '../../../common/MyButton/MyButton';
 import s from './../../Profile.module.scss';
 
 interface AddPostPropsType {
@@ -16,9 +17,8 @@ export const AddPost = ({ handleText, handleSend, text }: AddPostPropsType) => {
           value={text}
         ></textarea>
       </div>
-      <div className={s['posts-profile__send']}>
-        <button onClick={handleSend}>Send</button>
-      </div>
+      {/* <button onClick={handleSend}>Send</button> */}
+      <MyButton onClick={handleSend}>Send</MyButton>
     </div>
   );
 };

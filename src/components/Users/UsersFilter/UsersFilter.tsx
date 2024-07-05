@@ -19,6 +19,7 @@ import {
   setPage,
   setTermFilter,
 } from '../../../redux/users-reducer';
+import { MyButton } from '../../common/MyButton/MyButton';
 
 const options1 = [
   { title: 'All', value: 'null' },
@@ -160,9 +161,9 @@ export const UsersFilter = () => {
         </div>
       </div>
       <div className={s['form-users__column']}>
-        <button className={s['form-users__button']} type="submit">
-          <span>Search</span>
-        </button>
+        <MyButton type="submit" className={s['form-users__button']}>
+          Search
+        </MyButton>
       </div>
     </form>
   );

@@ -23,7 +23,7 @@ import {
   getUsersStatus,
 } from '../../redux/selectors/users-selector';
 import s from './Users.module.scss';
-import { Toast } from '../Toast/Toast';
+import { Toast } from '../common/Toast/Toast';
 import { UsersPaginator } from './UsersPaginator/UsersPaginator';
 import { User } from './User/User';
 import { ThemeContext } from '../../context/context';

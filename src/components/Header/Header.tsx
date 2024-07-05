@@ -13,11 +13,12 @@ import {
   getLogoutMessage,
 } from '../../redux/selectors/auth-selector';
 import { Preloader } from '../Preloader/Preloader';
-import { Toast } from '../Toast/Toast';
+import { Toast } from '../common/Toast/Toast';
 import cn from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ThemeContext } from '../../context/context';
+import { MyButton } from '../common/MyButton/MyButton';
 
 interface HeaderPropsType {
   menuOpen: boolean;
@@ -52,6 +53,12 @@ const Header = ({
     dispatch(getAuthUserData());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!isAuth) {
+      navigate('/login', { state: { from: location.pathname } });
+    }
+  }, [isAuth]);
+
   const handleToggleOpen = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
     setOpen(prevOpen => !prevOpen);
@@ -64,10 +71,8 @@ const Header = ({
 
   const handleExit = () => {
     dispatch(logout());
-    setTimeout(() => {
-      navigate('/login', { state: { from: location.pathname } });
-      setOpen(prevOpen => !prevOpen);
-    }, 200);
+    navigate('/login', { state: { from: location.pathname } });
+    setOpen(prevOpen => !prevOpen);
   };
 
   const handleSingIn = () => {
@@ -175,9 +180,9 @@ const Header = ({
                 </div>
               </>
             ) : (
-              <div className={s.header__signIn} onClick={handleSingIn}>
-                <span>Sign In</span>
-              </div>
+              <MyButton onClick={handleSingIn} style={{ marginLeft: '10px' }}>
+                Sign In
+              </MyButton>
             )}
           </div>
         </div>
