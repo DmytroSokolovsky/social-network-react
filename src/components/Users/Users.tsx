@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   getUsers,
@@ -60,16 +60,9 @@ const Users = () => {
     friend: friendFilter,
   });
 
-  let pagesCount;
-  let pages = [];
-
-  if (totalCount !== null) {
-    pagesCount = Math.ceil(totalCount / count);
-
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
-  }
+  const pages = useMemo(() => {
+    return calculatePages(totalCount, count);
+  }, [totalCount, count]);
 
   const countQuery = searchParams.get('count') || '10';
   const pageQuery = searchParams.get('page') || '1';
@@ -173,6 +166,19 @@ const Users = () => {
       )}
     </>
   );
+};
+
+const calculatePages = (totalCount: number | null, count: number) => {
+  if (totalCount === null) return [];
+
+  let pagesCount = Math.ceil(totalCount / count);
+  let pages = [];
+
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }
+
+  return pages;
 };
 
 export default Users;

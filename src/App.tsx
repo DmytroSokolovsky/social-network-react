@@ -7,12 +7,12 @@ import { Preloader } from './components/Preloader/Preloader';
 import Modal from './components/Modal/Modal';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { ThemeContext } from './context/context';
+import Header from './components/Header/Header';
+import Nav from './components/Nav/Nav';
 
-const Header = lazy(() => import('./components/Header/Header'));
-const Nav = lazy(() => import('./components/Nav/Nav'));
-const Chat = lazy(() => import('./components/Chat/Chat'));
 const Profile = lazy(() => import('./components/Profile/Profile'));
 const Users = lazy(() => import('./components/Users/Users'));
+const Chat = lazy(() => import('./components/Chat/Chat'));
 const Error = lazy(() => import('./components/Error/Error'));
 
 const App = () => {
