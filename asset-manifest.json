@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/social-network-react/static/css/main.648f436f.css",
-    "main.js": "/social-network-react/static/js/main.1f5f39c5.js",
+    "main.js": "/social-network-react/static/js/main.d9a607bd.js",
     "static/css/922.156e5508.chunk.css": "/social-network-react/static/css/922.156e5508.chunk.css",
     "static/js/922.5e20f133.chunk.js": "/social-network-react/static/js/922.5e20f133.chunk.js",
     "static/css/746.cef23c91.chunk.css": "/social-network-react/static/css/746.cef23c91.chunk.css",
@@ -21,7 +21,7 @@
     "index.html": "/social-network-react/index.html",
     "static/media/arrow__down.svg": "/social-network-react/static/media/arrow__down.d328942b8e2882f6dca1f3b10d585ef5.svg",
     "main.648f436f.css.map": "/social-network-react/static/css/main.648f436f.css.map",
-    "main.1f5f39c5.js.map": "/social-network-react/static/js/main.1f5f39c5.js.map",
+    "main.d9a607bd.js.map": "/social-network-react/static/js/main.d9a607bd.js.map",
     "922.156e5508.chunk.css.map": "/social-network-react/static/css/922.156e5508.chunk.css.map",
     "922.5e20f133.chunk.js.map": "/social-network-react/static/js/922.5e20f133.chunk.js.map",
     "746.cef23c91.chunk.css.map": "/social-network-react/static/css/746.cef23c91.chunk.css.map",
@@ -34,6 +34,6 @@
   },
   "entrypoints": [
     "static/css/main.648f436f.css",
-    "static/js/main.1f5f39c5.js"
+    "static/js/main.d9a607bd.js"
   ]
 }
