@@ -1,6 +1,12 @@
 import './App.scss';
 import s from './App.module.scss';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { lazy, useEffect, useState } from 'react';
 import { Suspense } from 'react';
 import { Preloader } from './components/Preloader/Preloader';
@@ -43,7 +49,7 @@ const App = () => {
   return (
     <>
       <ThemeContext.Provider value={theme}>
-        <BrowserRouter>
+        <HashRouter>
           <div className={s.wrapper} onClick={handleClose}>
             <div className={s.container}>
               <Suspense fallback={<Preloader />}>
@@ -68,7 +74,7 @@ const App = () => {
               </Suspense>
             </div>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </ThemeContext.Provider>
     </>
   );
